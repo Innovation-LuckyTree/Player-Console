@@ -1,0 +1,304 @@
+import { CategoryMenuItem } from "../shared/types/CategoryMenuItem";
+
+export const mockCategoryMenuData: CategoryMenuItem[] = [
+    {
+        id: 1,
+        icon: '',
+        path: '/saba',
+        parentPath: '/sports',
+        iconPath: '',
+        label: 'SABA',
+        isFavorite: false,
+        gameType: 'sports'
+    },
+    {
+        id: 2,
+        icon: '',
+        path: '/im-sports',
+        parentPath: '/sports',
+        iconPath: '',
+        label: 'IM SPORTS',
+        isFavorite: false,
+        gameType: 'sports'
+    },
+    {
+        id: 3,
+        icon: '',
+        path: '/btl-sports',
+        parentPath: '/sports',
+        iconPath: '',
+        label: 'BTL SPORTS',
+        isFavorite: false,
+        gameType: 'sports'
+    },
+    {
+        id: 4,
+        icon: '',
+        path: '/tg-sports',
+        parentPath: '/sports',
+        iconPath: '',
+        label: 'TG SPORTS',
+        isFavorite: false,
+        gameType: 'sports'
+    },
+    {
+        id: 5,
+        icon: '',
+        path: '/evolution',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'EVOLUTION',
+        isFavorite: false,
+        gameType: 'live-casino'
+    },
+    {
+        id: 6,
+        icon: '',
+        path: '/pragmatic-live',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'PRAGMATIC LIVE',
+        isFavorite: false,
+        gameType: 'live-casino'
+    },
+    {
+        id: 7,
+        icon: '',
+        path: '/sexy-gaming',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'SEXY GAMING',
+        isFavorite: false,
+        gameType: 'live-casino'
+    },
+    {
+        id: 8,
+        icon: '',
+        path: '/dream-gaming',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'DREAM GAMING',
+        isFavorite: false,
+        gameType: 'live-casino'
+    },
+    {
+        id: 9,
+        icon: '',
+        path: '/sa-gaming',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'SA GAMING',
+        isFavorite: false,
+        gameType: 'live-casino'
+    },
+    {
+        id: 10,
+        icon: '',
+        path: '/pragmatic',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'PRAGMATIC',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 11,
+        icon: '',
+        path: '/pg-soft',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'PG SOFT',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 12,
+        icon: '',
+        path: '/habanero',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'HABANERO',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 13,
+        icon: '',
+        path: '/red-tiger',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'RED TIGER',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 14,
+        icon: '',
+        path: '/netent',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'NETENT',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 15,
+        icon: '',
+        path: '/playn-go',
+        parentPath: '/slots',
+        iconPath: '',
+        label: 'PLAYN GO',
+        isFavorite: false,
+        gameType: 'slots'
+    },
+    {
+        id: 16,
+        icon: '',
+        path: '/jvb',
+        parentPath: '/cards',
+        iconPath: '',
+        label: 'JVB',
+        isFavorite: false,
+        gameType: 'cards'
+    },
+    {
+        id: 17,
+        icon: '',
+        path: '/kingmidas',
+        parentPath: '/cards',
+        iconPath: '',
+        label: 'KINGMIDAS',
+        isFavorite: false,
+        gameType: 'cards'
+    },
+    {
+        id: 18,
+        icon: '',
+        path: '/big-gaming',
+        parentPath: '/cards',
+        iconPath: '',
+        label: 'BIG GAMING',
+        isFavorite: false,
+        gameType: 'cards'
+    },
+    {
+        id: 19,
+        icon: '',
+        path: '/ludobet',
+        parentPath: '/cards',
+        iconPath: '',
+        label: 'LUDOBET',
+        isFavorite: false,
+        gameType: 'cards'
+    },
+    {
+        id: 20,
+        icon: '',
+        path: '/jili',
+        parentPath: '/fishing-games',
+        iconPath: '',
+        label: 'JILI',
+        isFavorite: false,
+        gameType: 'fishing-games'
+    },
+    {
+        id: 21,
+        icon: '',
+        path: '/fg-fishing',
+        parentPath: '/fishing-games',
+        iconPath: '',
+        label: 'FG FISHING',
+        isFavorite: false,
+        gameType: 'fishing-games'
+    },
+    {
+        id: 22,
+        icon: '',
+        path: '/joker-fishing',
+        parentPath: '/fishing-games',
+        iconPath: '',
+        label: 'JOKER FISHING',
+        isFavorite: false,
+        gameType: 'fishing-games'
+    },
+    {
+        id: 23,
+        icon: '',
+        path: '/cq9-fishing',
+        parentPath: '/fishing-games',
+        iconPath: '',
+        label: 'CQ9 FISHING',
+        isFavorite: false,
+        gameType: 'fishing-games'
+    },
+    {
+        id: 24,
+        icon: '',
+        path: '/og-esports',
+        parentPath: '/e-sports',
+        iconPath: '',
+        label: 'OG ESPORTS',
+        isFavorite: false,
+        gameType: 'e-sports'
+    },
+    {
+        id: 25,
+        icon: '',
+        path: '/im-esports',
+        parentPath: '/e-sports',
+        iconPath: '',
+        label: 'IM ESPORTS',
+        isFavorite: false,
+        gameType: 'e-sports'
+    },
+    {
+        id: 26,
+        icon: '',
+        path: '/tf-gaming',
+        parentPath: '/e-sports',
+        iconPath: '',
+        label: 'TF GAMING',
+        isFavorite: false,
+        gameType: 'e-sports'
+    },
+    {
+        id: 27,
+        icon: '',
+        path: '/pinnacle',
+        parentPath: '/e-sports',
+        iconPath: '',
+        label: 'PINNACLE',
+        isFavorite: false,
+        gameType: 'e-sports'
+    },
+    {
+        id: 28,
+        icon: '',
+        path: '/sv388',
+        parentPath: '/cockfighting',
+        iconPath: '',
+        label: 'SV388',
+        isFavorite: false,
+        gameType: 'cockfighting'
+    },
+    {
+        id: 29,
+        icon: '',
+        path: '/wpc',
+        parentPath: '/cockfighting',
+        iconPath: '',
+        label: 'WPC',
+        isFavorite: false,
+        gameType: 'cockfighting'
+    },
+    {
+        id: 30,
+        icon: '',
+        path: '/cw-live',
+        parentPath: '/cockfighting',
+        iconPath: '',
+        label: 'CW LIVE',
+        isFavorite: false,
+        gameType: 'cockfighting'
+    }
+];

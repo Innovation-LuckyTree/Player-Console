@@ -1,0 +1,32 @@
+:root {
+  --primary: #ed5c0e;
+  --bg-dark: #121212;
+  --text-light: #fff;
+  --text-dark: #222;
+  --bg-light: #fff;
+
+  --bg-dark2: #2a2a2a;
+
+  --bg-darkE: #1e1e1e;
+  --bg-darkA: #1a1a1a;
+  --bg-lightdark: #2d2d2d;
+
+  --card-bg: white;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --accent: #ff9800;
+  --accent1: #ff7a00;
+  --transition: all 0.3s ease;
+}
+
+body.light-mode {
+  --bg-light: black;
+  --bg-dark: #f1f1f1;
+  --bg-darkE: #f1f1f1;
+  --bg-darkA: #f1f1f1;
+  --bg-dark2: #f4f7fa;
+  --bg-lightdark: #f1f1f1;
+
+  --text-light: #222;
+  --card-bg: #fff;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+}
