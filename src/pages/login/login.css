@@ -1,0 +1,61 @@
+.custom-login-modal .ant-modal-close {
+  color: white; /* Changes the X button to white */
+}
+
+.custom-login-modal .ant-modal-close:hover {
+  color: #ff9900; /* Optional: hover color */
+}
+
+.custom-login-modal .ant-modal-content {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+}
+
+.ant-form-item .ant-form-item-label >label {
+  color: white;
+}
+
+.ant-select .ant-select-selection-item {
+  color: white;
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #ff8a00, #ff5500);
+  border: none;
+  color: white;
+  font-weight: bold;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.login-links {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.login-links a {
+  color: #ff9900;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 24px;
+  border-top: 1px solid #333;
+  padding-top: 16px;
+}
+
+.pagcor-badge {
+  display: inline-block;
+  border: 1px solid #ff9900;
+  border-radius: 6px;
+  color: #ff9900;
+  padding: 4px 12px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}

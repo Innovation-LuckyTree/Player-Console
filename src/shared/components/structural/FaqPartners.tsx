@@ -2,6 +2,7 @@
 import { FC } from "react"
 
 export const FaqPartners: FC =() => {
+    
   return (
     <section className="faq-partners-section">
         <div className="faq-partners-container">
@@ -12,7 +13,7 @@ export const FaqPartners: FC =() => {
                     <div className="accordion-title">Is Game Time Inc safe and secure?</div>
                     <div className="accordion-content">Yes, Game Time Inc is fully licensed by PAGCOR and uses advanced SSL encryption...</div>
                 </div>
-                <div className="accordion-item">
+                <div className="accordion-item active">
                     <div className="accordion-title">How do I withdraw my winnings?</div>
                     <div className="accordion-content">Withdrawals are processed via your wallet, accessible from the top bar.</div>
                 </div>

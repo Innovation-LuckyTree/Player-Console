@@ -1,3 +1,6 @@
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { useAuthStore } from "./useAuthStore";
 import * as authService from './../../services/authService';
