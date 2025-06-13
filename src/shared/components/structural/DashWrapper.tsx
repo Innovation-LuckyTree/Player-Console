@@ -16,9 +16,9 @@ export const DashWrapper: FC = () => {
   const {logout } = useAuth();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return (
     <>
