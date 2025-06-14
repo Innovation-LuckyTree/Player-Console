@@ -3,6 +3,7 @@ import { FC } from "react"
 import { Link } from "react-router-dom";
 import { mockCategoryMenuData } from "../../../utils/mock";
 import { useLocation } from 'react-router-dom';
+import { CategoryIcon } from "./CategoryIcon";
 
 interface CategoryMenuProps {
   menuName: string
@@ -16,8 +17,8 @@ export const CategoryMenu: FC<CategoryMenuProps> =({menuName}) => {
 
     const gmType = menuName.replace("/", "");
     const menuItemList = ((menuName == "/") || (menuName == "/favorites"))
-        ? mockCategoryMenuData
-        : mockCategoryMenuData.filter(m => m.gameType == gmType);
+        ? mockCategoryMenuData.sort((a,b) => b.isAvailable - a.isAvailable)
+        : mockCategoryMenuData.sort((a,b) => b.isAvailable - a.isAvailable).filter(m => m.gameType == gmType);
 
     return (
     <>
@@ -45,15 +46,20 @@ export const CategoryMenu: FC<CategoryMenuProps> =({menuName}) => {
                     menuItemList.map((item) => {
                         const isActive = item.path === currentCategoryPath;
                         const linkTo = (item.parentPath + item.path)
-                        
-                        return (
-                            <Link to={linkTo} className={`category-item ${isActive ? 'active' : ''}`} key={item.id}>
-                                <div className="category-ext-icon-wrapper">
-                                    <div className="category-icon-wrapper">🏆</div>
+                        if(item.isAvailable){
+                            return (
+                                 <Link to={linkTo} className={`category-item ${isActive ? 'active' : ''}`} key={item.id}>
+                                    <CategoryIcon label={item.label} isAvailable={item.isAvailable}/>
+                                </Link>
+                            )
+                        }else {
+                            return (
+                                 <div className={`category-item ${isActive ? 'active' : ''}`} key={item.id}>
+                                    <CategoryIcon label={item.label} isAvailable={item.isAvailable}/>
                                 </div>
-                                <div className="label">{item.label}</div>
-                            </Link>
-                        );
+                            )
+                        }
+
                     })
                 }
             </div>

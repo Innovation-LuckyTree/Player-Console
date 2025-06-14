@@ -7,4 +7,5 @@ export interface CategoryMenuItem {
   label: string;
   isFavorite: boolean;
   gameType: string;
+  isAvailable: number;
 }
