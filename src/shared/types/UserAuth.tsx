@@ -1,9 +1,14 @@
-export interface UserAuth{
-    name: string;
-    id: number;
-}
-
-export interface AuthResponse{
+export interface AuthResponse {
+    id: string,
+    accountId: string,
+    idNumber: number,
+    userName: string,
     token: string;
-    user: UserAuth;
+    refreshToken: string,
+    clientId: string,
+    type: string,
+    temporaryPassword: boolean,
+    isLocked: boolean,
+    expirationDate: number,
+    companyId: string
 }

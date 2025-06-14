@@ -16,7 +16,7 @@ export const useAuth=() => {
     setLoading(true);
     try {
       const response = await authService.login(payload);
-      setUserAuth(response.data.token,response.data.user);
+      setUserAuth(response.data.token,response.data);
       setError(null);
     } catch (err: any) {
       let message = 'Login failed';

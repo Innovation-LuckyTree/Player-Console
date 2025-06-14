@@ -45,11 +45,9 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
         </div>
 
         <Form form={form}  onFinish={handleRegistration} layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username' }]}>
+          <Form.Item label="Username" name="userName" rules={[{ required: true, message: 'Please input your username' }]}>
             <Input
               placeholder="Enter username"
-              inputMode="numeric"
-              pattern="[0-9]*"
               prefix={<UserOutlined/>}
               count={{
                 max: 11,
@@ -64,7 +62,7 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
 
           <Form.Item
                 label="Phone Number"
-                name="phone"
+                name="mobileNumber"
                 rules={[{ required: true, message: 'Please enter your phone number!' }]}
             >
                 <Input
@@ -86,11 +84,11 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
                 />
             </Form.Item>
 
-          <Form.Item label="Referral/Affiliate" name="referral" rules={[{ required: false }]}>
+          <Form.Item label="Referral/Affiliate" name="referralCode" rules={[{ required: false }]}>
             <Input placeholder="Enter Referral Code"/>
           </Form.Item>
 
-          <Form.Item label="Fullname" name="fullname" rules={[{ required: true, message: 'Please input your fullname' }]}>
+          <Form.Item label="Fullname" name="fullName" rules={[{ required: true, message: 'Please input your fullname' }]}>
             <Input placeholder="Enter you fullname"/>
           </Form.Item>
 

@@ -12,32 +12,37 @@ import { MainFooter } from "./MainFooter"
 import { LoginModal } from "../../../pages/login/LoginModal"
 import { RegistrationModal } from "../../../pages/login/RegistrationModal"
 import { ForgotPassword } from "../../../pages/login/ForgotPassword"
+import { LogoutModal } from "../../../pages/login/LogoutModal"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
-  const {logout } = useAuth();
+  const { logout } = useAuth();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [collapsed, setCollapsed] = useState(false);
   const [openLogin, setopenLogin] = useState(false);
   const [openReg, setopenReg] = useState(false);
   const [openForgotPass, setopenForgotPass] = useState(false);
+  const [openLogout, setopenLogout] = useState(false);
 
   const onLoginCallback = (code: number) => {
-    if(code == 1) {
-      setopenLogin(true);
-      setopenReg(false);
-    }
-
-    if(code == 2) {
-      setopenLogin(false);
-      setopenReg(true);
-    }
-
-    if(code == 3) {
-      setopenForgotPass(true);
-    }
+    // 1 = open login modal and close registration modal
+    if(code == 1) { setopenLogin(true); setopenReg(false); }
+    // 2 = open registration modal and close login modal
+    if(code == 2) { setopenLogin(false); setopenReg(true); }
+    // 3 = open forgot password modal
+    if(code == 3) { setopenForgotPass(true); }
+    // 4 = success login, close login modal and refresh fullpage
+    if(code == 4) { setopenLogin(false); } //window.location.reload();
+    // 5 = success registration, clone registration modal and open login modal
+    if(code == 4) { setopenReg(false); setopenLogin(true); }
   }
+
+  const onLogoutCallback = () => {
+    setopenLogout(false);
+    logout();
+  }
+
   // if (!isAuthenticated) {
   //   return <Navigate to="/login" replace />;
   // }
@@ -73,7 +78,7 @@ export const DashWrapper: FC = () => {
                   <Button className="btn"><NotificationFilled /></Button>
                   <Button className="btn">Withdrawal</Button>
                   <Button className="btn btn-orange">Deposit</Button>
-                  <Button className="btn">LOGOUT</Button>
+                  <Button onClick={() => setopenLogout(true)} className="btn">LOGOUT</Button>
                 </>
               }
               <Button className="btn btn-blue">HP</Button>
@@ -95,6 +100,7 @@ export const DashWrapper: FC = () => {
       <LoginModal isModalOpen={openLogin} handleOk={onLoginCallback} handleCancel={() => setopenLogin(false)} />
       <RegistrationModal isModalOpen={openReg} handleOk={onLoginCallback} handleCancel={() => setopenReg(false)} />
       <ForgotPassword isModalOpen={openForgotPass} handleOk={onLoginCallback} handleCancel={() => setopenForgotPass(false)}/>
+      <LogoutModal isModalOpen={openLogout} handleOk={onLogoutCallback} handleCancel={() => setopenLogout(false)} />
     </>
   )
 }
