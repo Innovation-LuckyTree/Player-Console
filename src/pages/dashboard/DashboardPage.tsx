@@ -1,113 +1,25 @@
 import { FC } from "react"
 import '../../App.css'
+import { GameGridCard } from "./components/GameGridCard";
+import { useGameList } from "./hooks/useGameList";
+import { Skeleton } from "antd";
 
 export const DashboardPage: FC =() => {
+  const {gameList, loading} = useGameList();
   return (
     <>
       <div className="game-row">
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
-
-        <div className="game-grid-card">
-          <div className="game-grid-image">
-            <button className="game-grid-play-btn">PLAY</button>
-            <div className="game-grid-favorite">
-              <button>♡</button>
-            </div>
-          </div>
-          <div className="game-grid-info">
-            <div className="game-grid-title">Book of Dead</div>
-            <div className="game-grid-subtitle">Adventure Slots</div>
-          </div>
-        </div>
+        {
+          !loading ?
+            gameList.map((game,index) => (
+              <GameGridCard title={game.gameName} description={game.gameType} id={game.gameId} key={index}/>
+            ))
+            :
+            Array.from({ length: 6 }).map((item, index) => (
+            <div className="game-grid-card" key={index}>
+              <Skeleton loading={!loading} active/>
+            </div>))
+        }
       </div>
     </>
   )

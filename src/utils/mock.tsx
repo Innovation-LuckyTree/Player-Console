@@ -9,7 +9,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'SABA',
         isFavorite: false,
-        gameType: 'sports'
+        gameType: 'sports',
+        isAvailable: 0
     },
     {
         id: 2,
@@ -19,7 +20,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'IM SPORTS',
         isFavorite: false,
-        gameType: 'sports'
+        gameType: 'sports',
+        isAvailable: 0
     },
     {
         id: 3,
@@ -29,7 +31,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'BTL SPORTS',
         isFavorite: false,
-        gameType: 'sports'
+        gameType: 'sports',
+        isAvailable: 0
     },
     {
         id: 4,
@@ -39,7 +42,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'TG SPORTS',
         isFavorite: false,
-        gameType: 'sports'
+        gameType: 'sports',
+        isAvailable: 0
     },
     {
         id: 5,
@@ -49,7 +53,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'EVOLUTION',
         isFavorite: false,
-        gameType: 'live-casino'
+        gameType: 'live-casino',
+        isAvailable: 0
     },
     {
         id: 6,
@@ -59,7 +64,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'PRAGMATIC LIVE',
         isFavorite: false,
-        gameType: 'live-casino'
+        gameType: 'live-casino',
+        isAvailable: 0
     },
     {
         id: 7,
@@ -69,7 +75,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'SEXY GAMING',
         isFavorite: false,
-        gameType: 'live-casino'
+        gameType: 'live-casino',
+        isAvailable: 0
     },
     {
         id: 8,
@@ -79,7 +86,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'DREAM GAMING',
         isFavorite: false,
-        gameType: 'live-casino'
+        gameType: 'live-casino',
+        isAvailable: 0
     },
     {
         id: 9,
@@ -89,7 +97,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'SA GAMING',
         isFavorite: false,
-        gameType: 'live-casino'
+        gameType: 'live-casino',
+        isAvailable: 0
     },
     {
         id: 10,
@@ -99,7 +108,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'PRAGMATIC',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 1
     },
     {
         id: 11,
@@ -109,7 +119,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'PG SOFT',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 0
     },
     {
         id: 12,
@@ -119,7 +130,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'HABANERO',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 0
     },
     {
         id: 13,
@@ -129,7 +141,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'RED TIGER',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 0
     },
     {
         id: 14,
@@ -139,7 +152,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'NETENT',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 0
     },
     {
         id: 15,
@@ -149,7 +163,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'PLAYN GO',
         isFavorite: false,
-        gameType: 'slots'
+        gameType: 'slots',
+        isAvailable: 0
     },
     {
         id: 16,
@@ -159,7 +174,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'JVB',
         isFavorite: false,
-        gameType: 'cards'
+        gameType: 'cards',
+        isAvailable: 0
     },
     {
         id: 17,
@@ -169,7 +185,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'KINGMIDAS',
         isFavorite: false,
-        gameType: 'cards'
+        gameType: 'cards',
+        isAvailable: 0
     },
     {
         id: 18,
@@ -179,7 +196,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'BIG GAMING',
         isFavorite: false,
-        gameType: 'cards'
+        gameType: 'cards',
+        isAvailable: 0
     },
     {
         id: 19,
@@ -189,7 +207,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'LUDOBET',
         isFavorite: false,
-        gameType: 'cards'
+        gameType: 'cards',
+        isAvailable: 0
     },
     {
         id: 20,
@@ -199,7 +218,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'JILI',
         isFavorite: false,
-        gameType: 'fishing-games'
+        gameType: 'fishing-games',
+        isAvailable: 0
     },
     {
         id: 21,
@@ -209,7 +229,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'FG FISHING',
         isFavorite: false,
-        gameType: 'fishing-games'
+        gameType: 'fishing-games',
+        isAvailable: 0
     },
     {
         id: 22,
@@ -219,7 +240,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'JOKER FISHING',
         isFavorite: false,
-        gameType: 'fishing-games'
+        gameType: 'fishing-games',
+        isAvailable: 0
     },
     {
         id: 23,
@@ -229,7 +251,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'CQ9 FISHING',
         isFavorite: false,
-        gameType: 'fishing-games'
+        gameType: 'fishing-games',
+        isAvailable: 0
     },
     {
         id: 24,
@@ -239,7 +262,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'OG ESPORTS',
         isFavorite: false,
-        gameType: 'e-sports'
+        gameType: 'e-sports',
+        isAvailable: 0
     },
     {
         id: 25,
@@ -249,7 +273,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'IM ESPORTS',
         isFavorite: false,
-        gameType: 'e-sports'
+        gameType: 'e-sports',
+        isAvailable: 0
     },
     {
         id: 26,
@@ -259,7 +284,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'TF GAMING',
         isFavorite: false,
-        gameType: 'e-sports'
+        gameType: 'e-sports',
+        isAvailable: 0
     },
     {
         id: 27,
@@ -269,7 +295,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'PINNACLE',
         isFavorite: false,
-        gameType: 'e-sports'
+        gameType: 'e-sports',
+        isAvailable: 0
     },
     {
         id: 28,
@@ -279,7 +306,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'SV388',
         isFavorite: false,
-        gameType: 'cockfighting'
+        gameType: 'cockfighting',
+        isAvailable: 0
     },
     {
         id: 29,
@@ -289,7 +317,8 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'WPC',
         isFavorite: false,
-        gameType: 'cockfighting'
+        gameType: 'cockfighting',
+        isAvailable: 0
     },
     {
         id: 30,
@@ -299,6 +328,7 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         iconPath: '',
         label: 'CW LIVE',
         isFavorite: false,
-        gameType: 'cockfighting'
+        gameType: 'cockfighting',
+        isAvailable: 0
     }
 ];
