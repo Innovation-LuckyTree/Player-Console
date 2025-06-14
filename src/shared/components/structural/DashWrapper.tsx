@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Button, Layout } from "antd"
 import { MainMenu } from "./MainMenu"
 import { Navigate, Outlet } from "react-router-dom"
@@ -81,7 +81,6 @@ export const DashWrapper: FC = () => {
                   <Button onClick={() => setopenLogout(true)} className="btn">LOGOUT</Button>
                 </>
               }
-              <Button className="btn btn-blue">HP</Button>
             </div>
           </div>
 

@@ -1,11 +1,6 @@
-import dayjs from "dayjs";
+
 import { Modal } from "antd";
 import { GAME_TYPES } from "./consts";
-import { DrawItem } from "../shared/types/DrawItem";
-
-export const formatLabel = (item: DrawItem) =>
-  `${item.gameType}, ${dayjs(item.drawDate).format('YYYY-MM-DD (hh:mm A)')}`;
-
 
 //CARD HELPER LOGICS
 function rankCombination(combo: string): number[] {
@@ -92,3 +87,34 @@ export const deletionModal = ( handleOkay:()=>void, bodyText: string) => {
     }
   });
 }
+
+const images = import.meta.glob('../assets/game_logo/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  import: 'default',
+});
+
+// Game name to image filename mapping
+const gameImageMap: Record<string, string> = {
+  'Aztec Treasure Hunt': 'Aztec-Bonanza.png',
+  'Volcano Goddess': 'Voodoo-Magic.png',
+  'Roulette 1 - Azure': 'Mysterious.png',
+  'Blackjack X 1 - Azure': 'Black-Bull.png',
+  'Gem Fire Fortune': 'Elemental-Gems-Megaways.png',
+  'Wild West Gold Blazing Bounty': 'Wild-West-Gold-Megaways.png',
+  'Finger Lick’n Free Spins': 'Spin-Score-Megaways.png',
+  'Gold Party 2 - After Hours': 'Gold-Party.png',
+};
+
+export const getGameImage = (gameName: string): string => {
+  const fileName = gameImageMap[gameName] || 'Book-Of-Kingdoms.png';
+
+    console.log(images);
+  for (const path in images) {
+    console.log(path);
+    if (path.includes(fileName)) {
+      return images[path] as string;
+    }
+  }
+
+  return images['Book-Of-Kingdoms.png'] as string; // fallback if image not found
+};
