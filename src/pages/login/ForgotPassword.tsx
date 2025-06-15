@@ -14,11 +14,11 @@ interface ResetPassModalProps {
   handleCancel: () => void;
 }
 
-export const ForgotPassword: FC<ResetPassModalProps> =({isModalOpen, handleOk, handleCancel}) => {
+export const ForgotPassword: FC<ResetPassModalProps> =({isModalOpen, handleCancel}) => {
   const [form] = Form.useForm();
-  const {login,loading, error} = useAuth();
+  const {loading, error} = useAuth();
 
-  const handleResetPassword: FormProps<LoginRequest>['onFinish'] = async (formValues) => {
+  const handleResetPassword: FormProps<LoginRequest>['onFinish'] = async (_) => {
     try{
       const values = await form.validateFields();
       console.log(values);

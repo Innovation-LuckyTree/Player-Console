@@ -15,7 +15,7 @@ export const DashboardPage: FC =() => {
               <GameGridCard title={game.gameName} description={game.gameType} id={game.gameId} key={index}/>
             ))
             :
-            Array.from({ length: 6 }).map((item, index) => (
+            Array.from({ length: 6 }).map((_, index) => (
             <div className="game-grid-card" key={index}>
               <Skeleton loading={!loading} active/>
             </div>))

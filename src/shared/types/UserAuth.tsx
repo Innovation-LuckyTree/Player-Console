@@ -12,3 +12,7 @@ export interface AuthResponse {
     expirationDate: number,
     companyId: string
 }
+export interface UserAuth{
+    name: string;
+    id: number;
+}

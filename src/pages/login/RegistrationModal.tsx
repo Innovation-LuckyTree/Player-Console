@@ -16,7 +16,7 @@ interface RegModalProps {
 
 export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, handleCancel}) => {
   const [form] = Form.useForm();
-  const [ loading, setLoading] = useState(false);
+  const [ loading, _] = useState(false);
 
   const handleRegistration: FormProps<RegistrationRequest>['onFinish'] = async () => {
     try{

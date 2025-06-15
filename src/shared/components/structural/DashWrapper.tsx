@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import { Button, Layout } from "antd"
 import { MainMenu } from "./MainMenu"
-import { Navigate, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
 import { useAuthStore } from "../../hooks/useAuthStore"
 import { useAuth } from "../../hooks/useAuth"
@@ -19,7 +19,7 @@ export const DashWrapper: FC = () => {
   const { logout } = useAuth();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, _] = useState(false);
   const [openLogin, setopenLogin] = useState(false);
   const [openReg, setopenReg] = useState(false);
   const [openForgotPass, setopenForgotPass] = useState(false);
