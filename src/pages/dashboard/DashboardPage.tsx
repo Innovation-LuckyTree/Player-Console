@@ -1,11 +1,21 @@
-import { FC } from "react"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FC, useState } from "react"
 import '../../App.css'
 import { GameGridCard } from "./components/GameGridCard";
 import { useGameList } from "./hooks/useGameList";
-import { Skeleton } from "antd";
+import { Pagination, Skeleton } from "antd";
 
 export const DashboardPage: FC =() => {
   const {gameList, loading} = useGameList();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
+  
+  const paginatedGames = gameList.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <>
       <div className="game-row">
@@ -20,6 +30,20 @@ export const DashboardPage: FC =() => {
               <Skeleton loading={!loading} active/>
             </div>))
         }
+
+        {
+          gameList.length > itemsPerPage && (
+          <div className="pagination-container">
+            <Pagination
+              current={currentPage}
+              pageSize={itemsPerPage}
+              total={gameList.length}
+              onChange={(page) => setCurrentPage(page)}
+              showQuickJumper
+              showSizeChanger={false}
+            />
+          </div>
+        )}
       </div>
     </>
   )
