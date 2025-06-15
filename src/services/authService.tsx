@@ -5,5 +5,5 @@ import { AuthResponse } from "../shared/types/UserAuth";
 import apiClient from "./apiClient";
 
 export const login = (payload: LoginRequest): Promise<ApiResponse<AuthResponse>>  => {
-  return apiClient.post<ApiResponse<AuthResponse>>("/Auth/account/login", payload).then((resp) => resp.data);
+  return apiClient.post<ApiResponse<AuthResponse>>("/api/Auth/account/login", payload).then((resp) => resp.data);
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
 import axios from "axios";
@@ -18,7 +19,7 @@ export const useGameList=() => {
     } catch (err: any) {
       let message = 'Login failed';
       if (axios.isAxiosError(err)) {
-        var code = err.status;
+        const code = err.status;
         switch (code){
           case 404:
             message = "Api not found";

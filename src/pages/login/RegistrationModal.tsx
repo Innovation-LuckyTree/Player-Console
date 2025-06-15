@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import './login.css'
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { RegistrationRequest } from './models/request';
+import { userRegistration } from '../../services/userService';
 
 const { Text, Link, Title } = Typography;
 const { Option } = Select;
@@ -21,7 +22,17 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
   const handleRegistration: FormProps<RegistrationRequest>['onFinish'] = async () => {
     try{
       const values = await form.validateFields();
-      console.log(values);
+
+      const regRequest: RegistrationRequest = {
+        userName: values.userName,
+        mobileNumber: values.mobileNumber,
+        referralCode: values.referralCode,
+        password: values.password,
+        fullName: values.fullName
+      };
+
+      const result = await userRegistration(regRequest);
+      console.log(result);
     }
     catch(e){
       console.log(e);
