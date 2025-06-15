@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Modal, Form, Input, Button, Typography, FormProps, Select } from 'antd';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
+import { Modal, Form, Input, Button, Typography, FormProps, Select, message } from 'antd';
 import { FC, useState } from 'react';
 import './login.css'
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { RegistrationRequest } from './models/request';
 import { userRegistration } from '../../services/userService';
+import axios from 'axios';
 
 const { Text, Link, Title } = Typography;
 const { Option } = Select;
@@ -17,10 +19,11 @@ interface RegModalProps {
 
 export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, handleCancel}) => {
   const [form] = Form.useForm();
-  const [ loading, _] = useState(false);
+  const [ loading, setLoading] = useState(false);
 
   const handleRegistration: FormProps<RegistrationRequest>['onFinish'] = async () => {
-    try{
+    setLoading(true);
+    try {
       const values = await form.validateFields();
 
       const regRequest: RegistrationRequest = {
@@ -31,11 +34,21 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
         fullName: values.fullName
       };
 
-      const result = await userRegistration(regRequest);
-      console.log(result);
+      await userRegistration(regRequest);
+      handleOk(5);
     }
-    catch(e){
-      console.log(e);
+    catch(err: any) {
+      if (axios.isAxiosError(err)) {
+        const code = err.status;
+        switch (code){
+          case 404:
+            message.error("Api not found"); break;
+          case 500:
+            message.error("Something went wrong with the servers. Try again later."); break; 
+        }
+      }
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from "react"
-import { Button, Layout } from "antd"
+import { Button, Layout, message } from "antd"
 import { MainMenu } from "./MainMenu"
 import { Outlet } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
@@ -36,8 +36,15 @@ export const DashWrapper: FC = () => {
     if(code == 3) { setopenForgotPass(true); }
     // 4 = success login, close login modal and refresh fullpage
     if(code == 4) { setopenLogin(false); } //window.location.reload();
-    // 5 = success registration, clone registration modal and open login modal
-    if(code == 4) { setopenReg(false); setopenLogin(true); }
+    // 5 = success registration, close registration modal and open login modal
+    if(code == 5) { 
+      message.success("Registration successful!");
+
+      setTimeout(() => {
+        setopenReg(false); 
+        setopenLogin(true); 
+      }, 2000); // 1000 ms = 1 second
+    }
   }
 
   const onLogoutCallback = () => {

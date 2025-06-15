@@ -16,12 +16,19 @@ export const useAuth=() => {
     setLoading(true);
     try {
       const response = await authService.login(payload);
+
+      if ('responseCode' in response) {
+        const erroMsg = "Username or Password is incorrect";
+        setError(erroMsg);
+        throw new Error(erroMsg);
+      }
+
       setUserAuth(response.data);
       setError(null);
     } catch (err: any) {
       let message = 'Login failed';
       if (axios.isAxiosError(err)) {
-        var code = err.status;
+        const code = err.status;
         switch (code){
           case 404:
             message = "Api not found";

@@ -27,13 +27,14 @@ export const LoginModal: FC<LoginModalProps> =({isModalOpen, handleOk, handleCan
         password: formValues.password,
         ipAddress: "10.0.0.1"
       };
-      await login(loginRequest)
-
+      
+      await login(loginRequest);
+      
       // response callback
       handleOk(4);
     }
-    catch(e){
-      message.error(error);
+    catch(e) {
+      message.error(error ?? "Username or Password is incorrect");
     }
   };
 

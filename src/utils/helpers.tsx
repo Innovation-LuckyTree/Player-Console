@@ -108,9 +108,7 @@ const gameImageMap: Record<string, string> = {
 export const getGameImage = (gameName: string): string => {
   const fileName = gameImageMap[gameName] || 'Book-Of-Kingdoms.png';
 
-    console.log(images);
   for (const path in images) {
-    console.log(path);
     if (path.includes(fileName)) {
       return images[path] as string;
     }
