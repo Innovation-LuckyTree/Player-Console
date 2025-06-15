@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Modal, Form, Input, Button, Typography, FormProps, message, Select } from 'antd';
-import { FC } from 'react';
+import { Modal, Form, Input, Button, Typography, FormProps, Select } from 'antd';
+import { FC, useState } from 'react';
 import './login.css'
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { LoginRequest } from './models/request';
-import { useAuth } from '../../shared/hooks/useAuth';
+import { RegistrationRequest } from './models/request';
 
 const { Text, Link, Title } = Typography;
 const { Option } = Select;
@@ -17,15 +16,15 @@ interface RegModalProps {
 
 export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, handleCancel}) => {
   const [form] = Form.useForm();
-  const {login,loading, error} = useAuth();
+  const [ loading, setLoading] = useState(false);
 
-  const handleRegistration: FormProps<LoginRequest>['onFinish'] = async (formValues) => {
+  const handleRegistration: FormProps<RegistrationRequest>['onFinish'] = async () => {
     try{
       const values = await form.validateFields();
       console.log(values);
     }
     catch(e){
-      message.error(error);
+      console.log(e);
     }
   };
 
