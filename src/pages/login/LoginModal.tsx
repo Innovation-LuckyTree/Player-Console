@@ -21,10 +21,20 @@ export const LoginModal: FC<LoginModalProps> =({isModalOpen, handleOk, handleCan
   const handleLogin: FormProps<LoginRequest>['onFinish'] = async (formValues) => {
     try{
       const values = await form.validateFields();
-      console.log(values);
+
+      const loginRequest: LoginRequest = {
+        userName: values.userName,
+        password: formValues.password,
+        ipAddress: "10.0.0.1"
+      };
+      
+      await login(loginRequest);
+      
+      // response callback
+      handleOk(4);
     }
-    catch(e){
-      message.error(error);
+    catch(e) {
+      message.error(error ?? "Username or Password is incorrect");
     }
   };
 
@@ -44,11 +54,11 @@ export const LoginModal: FC<LoginModalProps> =({isModalOpen, handleOk, handleCan
         </div>
 
         <Form form={form}  onFinish={handleLogin} layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username' }]}>
+          <Form.Item label="Username" name="userName" rules={[{ required: true, message: 'Please input your username' }]}>
             <Input
               placeholder="Enter username"
-              inputMode="numeric"
-              pattern="[0-9]*" 
+              // inputMode="numeric"
+              // pattern="[0-9]*" 
               prefix={<UserOutlined/>}
               count={{
                 max: 11,

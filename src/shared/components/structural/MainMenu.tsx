@@ -16,7 +16,7 @@ interface MenuItem {
   label: string;
 }
 
-export const MainMenu: FC<MainMenuProps> =({collapsed}) => {
+export const MainMenu: FC<MainMenuProps> =() => {
   const location = useLocation();
   const currentPath = location.pathname;
 
