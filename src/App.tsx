@@ -6,6 +6,11 @@ import { ConfigProvider } from 'antd'
 import '@ant-design/v5-patch-for-react-19'
 import { GameWrapper } from './pages/game_wrapper/GameWrapper'
 import { PageNotFound } from './pages/404/PageNotFound'
+import { AccountWrapper } from './shared/components/accountWrapper/AccountWrapper'
+import { MyProfile } from './pages/account/MyProfile'
+import { AccountNotification } from './pages/notification/AccountNotification'
+import { AccountWallet } from './pages/wallet/AccountWallet'
+import { AccountDeposit } from './pages/deposit/AccountDeposit'
 
 function App() {
 
@@ -15,6 +20,16 @@ function App() {
         <Route path='*' element={<PageNotFound />} />
         <Route path="/" element={<DashWrapper />}>
           <Route path="/:menu?/:company?" element={<DashboardPage />}/>
+        </Route>
+        <Route path="/account" element={<AccountWrapper />}>
+          <Route path="/account" element={<MyProfile />}/>
+          <Route path="/account/notification" element={<AccountNotification />}/>
+          <Route path="/account/wallet" element={<AccountWallet />}/>
+          <Route path="/account/deposit" element={<AccountDeposit />}/>
+          <Route path="/account/withdrawal" element={<AccountDeposit />}/>
+          <Route path="/account/promo-center" element={<AccountDeposit />}/>
+          <Route path="/account/bet-history" element={<AccountDeposit />}/>
+          <Route path="/account/statement" element={<AccountDeposit />}/>
         </Route>
         <Route path="/game/:gameId" element={<GameWrapper />}/>
       </Routes>
