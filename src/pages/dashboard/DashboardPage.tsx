@@ -4,12 +4,12 @@ import '../../App.css'
 import { GameGridCard } from "./components/GameGridCard";
 import { useGameList } from "./hooks/useGameList";
 import { Pagination, Skeleton } from "antd";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 export const DashboardPage: FC =() => {
-  const location = useLocation();
-  const currentMainPath = location.pathname.split('/')[1];
-  const currentCategoryPath = location.pathname.split('/')[2];
+  // const location = useLocation();
+  // const currentMainPath = location.pathname.split('/')[1];
+  // const currentCategoryPath = location.pathname.split('/')[2];
 
   const {gameList, loading} = useGameList();
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useState } from "react"
+import { FC } from "react"
 import { Link, useLocation } from "react-router-dom";
 import { getAccountMenu } from "../../../app/accountRoutes";
 
@@ -15,7 +15,7 @@ export const MenuSideBar: FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const [activeKey, setActiveKey] = useState("");
+  // const [activeKey, setActiveKey] = useState("");
 
   const accountMenu: MenuItem[] = getAccountMenu().filter(
     (item): item is MenuItem => item != null && typeof item.key === "string"
@@ -34,7 +34,6 @@ export const MenuSideBar: FC = () => {
                   return (
                     <Link to={item.key} key={item.key}>
                       <li
-                        onClick={() => setActiveKey(item.key)}
                         className={isActive ? "active" : ""}
                       >
                         <span className="icon">{item.icon}</span>

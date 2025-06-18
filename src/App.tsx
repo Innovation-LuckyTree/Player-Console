@@ -13,6 +13,7 @@ import { AccountWallet } from './pages/wallet/AccountWallet'
 import { AccountDeposit } from './pages/deposit/AccountDeposit'
 import { AccountWithdrawal } from './pages/withdrawal/AccountWithdrawal'
 import { PromoCenter } from './pages/promotion/PromoCenter'
+import { AccountStatement } from './pages/statement/AccountStatement'
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
           <Route path="/account/withdrawal" element={<AccountWithdrawal />}/>
           <Route path="/account/promo-center" element={<PromoCenter />}/>
           <Route path="/account/bet-history" element={<AccountDeposit />}/>
-          <Route path="/account/statement" element={<AccountDeposit />}/>
+          <Route path="/account/statement" element={<AccountStatement />}/>
         </Route>
         <Route path="/game/:gameId" element={<GameWrapper />}/>
       </Routes>
