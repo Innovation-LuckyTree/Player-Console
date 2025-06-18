@@ -539,38 +539,6 @@ body {
   padding: 24px 0;
 }
 
-.ant-pagination {
-  color:var(--text-light);
-}
-
-.ant-pagination-item-active {
-  background-color: var(--accent);
-  border-color: var(--accent);
-  color: var(--text-light);
-}
-
-/* Fix pagination arrow color for dark background */
-.ant-pagination-prev,
-.ant-pagination-next {
-  color: var(--text-light) !important; /* or your preferred light color */
-}
-
-/* Ellipsis */
-.ant-pagination-item-ellipsis {
-  color:  var(--text-light) !important;
-}
-
-.ant-pagination-prev button,
-.ant-pagination-next button {
-  color: var(--text-light) !important;
-}
-
-/* Optional: Hover style */
-.ant-pagination-prev:hover,
-.ant-pagination-next:hover {
-  color: var(--primary) !important;
-}
-
 @media (max-width: 768px) {
   .top-bar {
     flex-direction: column;

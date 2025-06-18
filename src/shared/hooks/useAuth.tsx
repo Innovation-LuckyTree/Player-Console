@@ -18,9 +18,11 @@ export const useAuth=() => {
       const response = await authService.login(payload);
 
       if ('responseCode' in response) {
-        const erroMsg = "Username or Password is incorrect";
-        setError(erroMsg);
-        throw new Error(erroMsg);
+        if(response.responseCode == "500") {
+          const erroMsg = "Username or Password is incorrect";
+          setError(erroMsg);
+          throw new Error(erroMsg);
+        }
       }
 
       setUserAuth(response.data);
