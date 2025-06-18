@@ -31,6 +31,7 @@ body.light-mode {
   --bg-lightdark: #f1f1f1;
 
   --text-light: #222;
+  --text-dark: white;
   --card-bg: #fff;
   --card-shadow: rgba(0, 0, 0, 0.05);
 }

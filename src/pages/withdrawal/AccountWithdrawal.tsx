@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 
 const { Option } = Select;
 
-export const AccountDeposit: FC = () => {
+export const AccountWithdrawal: FC = () => {
 
     const [method, setMethod] = useState("bank");
     const quickAmounts = [100, 200, 300, 400, 800, 1000, 1500, 2000, 2500];
@@ -20,22 +20,22 @@ export const AccountDeposit: FC = () => {
     return (
         <Form layout="vertical">
         <div className="deposit-section">
-            <div className="deposit-header">DEPOSIT</div>
+            <div className="deposit-header">WITHDRAWAL</div>
 
             <div className="balance-card">
-                <span>Current Balance</span>
+                <span>Available Balance</span>
                 <span style={{ color: "#ff8c00" }}>PHP 1250.43</span>
             </div>
 
             <div className="deposit-summary" style={{marginBottom: '10px'}}>
-                <label>Payment Method</label>
+                <label>Withdrawal Method</label>
             </div>
 
             <div className="payment-methods">
                 <div className={`payment-method ${method === "bank" ? "active" : ""}`}
                 onClick={() => setMethod("bank")}>
                     <div>💳<br />Online Banking</div>
-                    <small>Instant</small>
+                    <small>1-3 business days</small>
                 </div>
                 <div
                 className={`payment-method ${method === "gcash" ? "active" : ""}`}
@@ -44,9 +44,35 @@ export const AccountDeposit: FC = () => {
                     <small>Instant</small>
                 </div>
             </div>
+            
+            {
+                (method == "bank") &&
+                <div className="bank-summary">
+                    <h3>Bank Account Details</h3>
+                    <div className="form-row">
+                        <div>
+                            <Form.Item label="Bank Name" name="bankName">
+                                <Input placeholder="e.g., BDO, BPI, Metrobank" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                        <div>
+                            <Form.Item label="Account Number" name="accountNumber">
+                                <Input placeholder="Enter account number" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div>
+                            <Form.Item label="Account Holder Name" name="holderName">
+                                <Input placeholder="Fullname as per bank records" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                    </div>
+                </div>
+            }
 
             <div className="deposit-summary" style={{marginBottom: '10px'}}>
-                <label>Deposit Limits</label>
+                <label>Withrawal Limits</label>
                 <div style={{ marginTop: "5px" }}></div>
                 <span style={{ color: 'var(--accent1)' }}>PHP 100.00 - PHP 100,000.00</span>
             </div>
@@ -69,12 +95,12 @@ export const AccountDeposit: FC = () => {
             </div>
 
             <div className="deposit-summary">
-                <span>Processing Fees</span>
-                <span>PHP 0.00</span>
+                <span>Processing Fees (2% min PHP 15)</span>
+                <span style={{color:'red'}}>- PHP 0.00</span>
             </div>
             <div className="deposit-summary">
-                <span>Receivable Amount</span>
-                <span style={{ color: "#ff8c00" }}>PHP {amount.toFixed(2)}</span>
+                <span>Net Amount</span>
+                <span style={{ color: 'var(--accent1)' }}>PHP {amount.toFixed(2)}</span>
             </div>
 
             <div className="quick-amounts">
@@ -86,16 +112,16 @@ export const AccountDeposit: FC = () => {
             </div>
 
             <div className="deposit-info">
-                <strong>Deposit Information:</strong>
+                <strong>Security Notice:</strong>
                 <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
-                    <li>All deposits are processed instantly</li>
-                    <li>No processing fees for deposits</li>
-                    <li>Minimum deposit amount is PHP 100.00</li>
-                    <li>Contact support if your deposit doesn’t reflect within 5 minutes</li>
+                    <li>Verify your account details before confirming withdrawal</li>
+                    <li>Bank transfers take 1-3 business days to process</li>
+                    <li>E-wallet withdrawals are processed instantly</li>
+                    <li>Contact support if you don't receive funds within expected timeframe</li>
                 </ul>
             </div>
 
-            <button className="deposit-button">DEPOSIT</button>
+            <button className="deposit-button">WITHDRAW</button>
         </div>
         </Form>
         );

@@ -11,6 +11,8 @@ import { MyProfile } from './pages/account/MyProfile'
 import { AccountNotification } from './pages/notification/AccountNotification'
 import { AccountWallet } from './pages/wallet/AccountWallet'
 import { AccountDeposit } from './pages/deposit/AccountDeposit'
+import { AccountWithdrawal } from './pages/withdrawal/AccountWithdrawal'
+import { PromoCenter } from './pages/promotion/PromoCenter'
 
 function App() {
 
@@ -26,8 +28,8 @@ function App() {
           <Route path="/account/notification" element={<AccountNotification />}/>
           <Route path="/account/wallet" element={<AccountWallet />}/>
           <Route path="/account/deposit" element={<AccountDeposit />}/>
-          <Route path="/account/withdrawal" element={<AccountDeposit />}/>
-          <Route path="/account/promo-center" element={<AccountDeposit />}/>
+          <Route path="/account/withdrawal" element={<AccountWithdrawal />}/>
+          <Route path="/account/promo-center" element={<PromoCenter />}/>
           <Route path="/account/bet-history" element={<AccountDeposit />}/>
           <Route path="/account/statement" element={<AccountDeposit />}/>
         </Route>

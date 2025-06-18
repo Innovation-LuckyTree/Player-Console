@@ -79,8 +79,17 @@ export const AccountWallet: FC = () => {
             </div>
             </div>
         </div>
-    </div>
 
+        <div className="deposit-info">
+            <strong>Wallet Information:</strong>
+            <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
+                <li>You have one unified wallet that works across all gaming providers</li>
+                <li>Different providers may have varying eligibility for bonus credits</li>
+                <li>Some providers accept only real money deposits, while others accept both real money and bonus credits</li>
+                <li>Your available balance may differ between providers based on their credit acceptance policies</li>
+            </ul>
+        </div>
+    </div>
     </>
   )
 }
