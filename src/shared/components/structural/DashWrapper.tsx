@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from "react"
-import { Button, Layout } from "antd"
+import { Button, Layout, message } from "antd"
 import { MainMenu } from "./MainMenu"
-import { Navigate, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
 import { useAuthStore } from "../../hooks/useAuthStore"
 import { useAuth } from "../../hooks/useAuth"
@@ -12,34 +12,46 @@ import { MainFooter } from "./MainFooter"
 import { LoginModal } from "../../../pages/login/LoginModal"
 import { RegistrationModal } from "../../../pages/login/RegistrationModal"
 import { ForgotPassword } from "../../../pages/login/ForgotPassword"
+import { LogoutModal } from "../../../pages/login/LogoutModal"
 import { useGameList } from "../../../pages/dashboard/hooks/useGameList"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
-  const {logout } = useAuth();
+  const { logout } = useAuth();
   const {getGameList} = useGameList();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, _] = useState(false);
   const [openLogin, setopenLogin] = useState(false);
   const [openReg, setopenReg] = useState(false);
   const [openForgotPass, setopenForgotPass] = useState(false);
+  const [openLogout, setopenLogout] = useState(false);
 
   const onLoginCallback = (code: number) => {
-    if(code == 1) {
-      setopenLogin(true);
-      setopenReg(false);
-    }
+    // 1 = open login modal and close registration modal
+    if(code == 1) { setopenLogin(true); setopenReg(false); }
+    // 2 = open registration modal and close login modal
+    if(code == 2) { setopenLogin(false); setopenReg(true); }
+    // 3 = open forgot password modal
+    if(code == 3) { setopenForgotPass(true); }
+    // 4 = success login, close login modal and refresh fullpage
+    if(code == 4) { setopenLogin(false); } //window.location.reload();
+    // 5 = success registration, close registration modal and open login modal
+    if(code == 5) { 
+      message.success("Registration successful!");
 
-    if(code == 2) {
-      setopenLogin(false);
-      setopenReg(true);
-    }
-
-    if(code == 3) {
-      setopenForgotPass(true);
+      setTimeout(() => {
+        setopenReg(false); 
+        setopenLogin(true); 
+      }, 2000); // 1000 ms = 1 second
     }
   }
+
+  const onLogoutCallback = () => {
+    setopenLogout(false);
+    logout();
+  }
+
   // if (!isAuthenticated) {
   //   return <Navigate to="/login" replace />;
   // }
@@ -79,7 +91,7 @@ export const DashWrapper: FC = () => {
                   <Button className="btn"><NotificationFilled /></Button>
                   <Button className="btn">Withdrawal</Button>
                   <Button className="btn btn-orange">Deposit</Button>
-                  <Button className="btn">LOGOUT</Button>
+                  <Button onClick={() => setopenLogout(true)} className="btn">LOGOUT</Button>
                 </>
               }
             </div>
@@ -100,6 +112,7 @@ export const DashWrapper: FC = () => {
       <LoginModal isModalOpen={openLogin} handleOk={onLoginCallback} handleCancel={() => setopenLogin(false)} />
       <RegistrationModal isModalOpen={openReg} handleOk={onLoginCallback} handleCancel={() => setopenReg(false)} />
       <ForgotPassword isModalOpen={openForgotPass} handleOk={onLoginCallback} handleCancel={() => setopenForgotPass(false)}/>
+      <LogoutModal isModalOpen={openLogout} handleOk={onLogoutCallback} handleCancel={() => setopenLogout(false)} />
     </>
   )
 }

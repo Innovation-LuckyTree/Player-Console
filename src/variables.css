@@ -9,6 +9,8 @@
 
   --bg-darkE: #1e1e1e;
   --bg-darkA: #1a1a1a;
+  --bg-darkD: #2d2d2d;
+  --bg-darkC: #1c1c1c;
   --bg-lightdark: #2d2d2d;
 
   --card-bg: white;
@@ -23,10 +25,13 @@ body.light-mode {
   --bg-dark: #f1f1f1;
   --bg-darkE: #f1f1f1;
   --bg-darkA: #f1f1f1;
+  --bg-darkD: #fff;
+  --bg-darkC: #f4f7fa;
   --bg-dark2: #f4f7fa;
   --bg-lightdark: #f1f1f1;
 
   --text-light: #222;
+  --text-dark: white;
   --card-bg: #fff;
   --card-shadow: rgba(0, 0, 0, 0.05);
 }

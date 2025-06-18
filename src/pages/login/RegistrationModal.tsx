@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Modal, Form, Input, Button, Typography, FormProps, message, Select } from 'antd';
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
+import { Modal, Form, Input, Button, Typography, FormProps, Select, message } from 'antd';
+import { FC, useState } from 'react';
 import './login.css'
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
-import { LoginRequest } from './models/request';
-import { useAuth } from '../../shared/hooks/useAuth';
+import { RegistrationRequest } from './models/request';
+import { userRegistration } from '../../services/userService';
+import axios from 'axios';
 
 const { Text, Link, Title } = Typography;
 const { Option } = Select;
@@ -17,15 +19,36 @@ interface RegModalProps {
 
 export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, handleCancel}) => {
   const [form] = Form.useForm();
-  const {login,loading, error} = useAuth();
+  const [ loading, setLoading] = useState(false);
 
-  const handleRegistration: FormProps<LoginRequest>['onFinish'] = async (formValues) => {
-    try{
+  const handleRegistration: FormProps<RegistrationRequest>['onFinish'] = async () => {
+    setLoading(true);
+    try {
       const values = await form.validateFields();
-      console.log(values);
+
+      const regRequest: RegistrationRequest = {
+        userName: values.userName,
+        mobileNumber: values.mobileNumber,
+        referralCode: values.referralCode,
+        password: values.password,
+        fullName: values.fullName
+      };
+
+      await userRegistration(regRequest);
+      handleOk(5);
     }
-    catch(e){
-      message.error(error);
+    catch(err: any) {
+      if (axios.isAxiosError(err)) {
+        const code = err.status;
+        switch (code){
+          case 404:
+            message.error("Api not found"); break;
+          case 500:
+            message.error("Something went wrong with the servers. Try again later."); break; 
+        }
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,11 +68,9 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
         </div>
 
         <Form form={form}  onFinish={handleRegistration} layout="vertical" style={{ marginTop: 24 }}>
-          <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username' }]}>
+          <Form.Item label="Username" name="userName" rules={[{ required: true, message: 'Please input your username' }]}>
             <Input
               placeholder="Enter username"
-              inputMode="numeric"
-              pattern="[0-9]*"
               prefix={<UserOutlined/>}
               count={{
                 max: 11,
@@ -64,7 +85,7 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
 
           <Form.Item
                 label="Phone Number"
-                name="phone"
+                name="mobileNumber"
                 rules={[{ required: true, message: 'Please enter your phone number!' }]}
             >
                 <Input
@@ -86,11 +107,11 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
                 />
             </Form.Item>
 
-          <Form.Item label="Referral/Affiliate" name="referral" rules={[{ required: false }]}>
+          <Form.Item label="Referral/Affiliate" name="referralCode" rules={[{ required: false }]}>
             <Input placeholder="Enter Referral Code"/>
           </Form.Item>
 
-          <Form.Item label="Fullname" name="fullname" rules={[{ required: true, message: 'Please input your fullname' }]}>
+          <Form.Item label="Fullname" name="fullName" rules={[{ required: true, message: 'Please input your fullname' }]}>
             <Input placeholder="Enter you fullname"/>
           </Form.Item>
 
