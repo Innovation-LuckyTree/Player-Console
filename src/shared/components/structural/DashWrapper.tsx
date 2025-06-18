@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react"
 import { Button, Layout, message } from "antd"
 import { MainMenu } from "./MainMenu"
-import { Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
 import { useAuthStore } from "../../hooks/useAuthStore"
 import { useAuth } from "../../hooks/useAuth"
@@ -85,7 +85,10 @@ export const DashWrapper: FC = () => {
               {
                 (isAuthenticated) &&
                 <>
-                  <span>Hi,</span> <strong>Francisco</strong> 
+                  <span>Hi,</span>
+                  <Link to="/account">
+                    <strong>Francisco</strong>
+                  </Link>
                   <span>Credit:</span> <span className="credit">PHP 1250.43</span>
                   <DollarOutlined />
                   <Button className="btn"><NotificationFilled /></Button>
