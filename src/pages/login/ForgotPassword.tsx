@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Modal, Form, Input, Button, Typography, FormProps, message, Select } from 'antd';
 import { FC } from 'react';
-import './login.css'
+import '../../modal.css';
 import { LoginRequest } from './models/request';
 import { useAuth } from '../../shared/hooks/useAuth';
 

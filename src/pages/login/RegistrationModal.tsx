@@ -2,7 +2,7 @@
  
 import { Modal, Form, Input, Button, Typography, FormProps, Select, message } from 'antd';
 import { FC, useState } from 'react';
-import './login.css'
+import '../../modal.css';
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { RegistrationRequest } from './models/request';
 import { userRegistration } from '../../services/userService';

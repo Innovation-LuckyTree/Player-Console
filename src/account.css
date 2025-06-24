@@ -261,6 +261,7 @@ label {
   border-radius: 6px;
   margin-bottom: 15px;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .notification-title {

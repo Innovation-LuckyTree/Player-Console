@@ -71,10 +71,10 @@
   background-color: var(--accent);
 }
 
-.ant-picker {
+/* .ant-picker {
   background-color: var(--bg-darkD) !important;
   color: var(--text-light) !important;
-}
+} */
 
 .custom-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
   color: var(--text-light) !important;

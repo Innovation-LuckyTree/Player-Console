@@ -20,6 +20,7 @@ export const BetHistory: FC =() => {
                 <label>Start Date</label>
                 <RangePicker
                     value={dateRange}
+                    onChange={(values) => setDateRange(values)}
                     style={{ backgroundColor: "var(--bg-darkD)", border: "1px solid #444" }}
                     allowClear
                 />
