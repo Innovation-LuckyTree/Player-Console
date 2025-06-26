@@ -31,7 +31,8 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
         mobileNumber: values.mobileNumber,
         referralCode: values.referralCode,
         password: values.password,
-        fullName: values.fullName
+        firstName: values.firstName,
+        lastName: values.lastName
       };
 
       await userRegistration(regRequest);
@@ -111,9 +112,14 @@ export const RegistrationModal: FC<RegModalProps> =({isModalOpen, handleOk, hand
             <Input placeholder="Enter Referral Code"/>
           </Form.Item>
 
-          <Form.Item label="Fullname" name="fullName" rules={[{ required: true, message: 'Please input your fullname' }]}>
-            <Input placeholder="Enter you fullname"/>
+          <Form.Item label="First Name" name="firstName" rules={[{ required: true, message: 'Please input your firstName' }]}>
+            <Input placeholder="Enter you First Name"/>
           </Form.Item>
+
+          <Form.Item label="Last Name" name="lastName" rules={[{ required: true, message: 'Please input your lastname' }]}>
+            <Input placeholder="Enter you Last Name"/>
+          </Form.Item>
+
 
           <Form.Item>
             <Button block className="login-btn" type="primary" htmlType="submit" loading={loading}>

@@ -330,5 +330,16 @@ export const mockCategoryMenuData: CategoryMenuItem[] = [
         isFavorite: false,
         gameType: 'cockfighting',
         isAvailable: 0
-    }
+    },
+    {
+        id: 31,
+        icon: '',
+        path: '/game/s/double-spin',
+        parentPath: '/live-casino',
+        iconPath: '',
+        label: 'DOUBLE SPIN',
+        isFavorite: false,
+        gameType: 'live-casino',
+        isAvailable: 1
+    },
 ];

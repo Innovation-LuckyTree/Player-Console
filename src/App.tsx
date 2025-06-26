@@ -15,6 +15,7 @@ import { AccountWithdrawal } from './pages/withdrawal/AccountWithdrawal'
 import { PromoCenter } from './pages/promotion/PromoCenter'
 import { AccountStatement } from './pages/statement/AccountStatement'
 import { BetHistory } from './pages/bet-history/BetHistory'
+import { GameSpecialWrapper } from './pages/game-special/GameSpecial'
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/account/statement" element={<AccountStatement />}/>
         </Route>
         <Route path="/game/:gameId" element={<GameWrapper />}/>
+        <Route path="live-casino/game/s/:gameName" element={<GameSpecialWrapper />}/>
       </Routes>
     </ConfigProvider>
   )
