@@ -18,8 +18,8 @@ import { useGameList } from "../../../pages/dashboard/hooks/useGameList"
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
-  const {getGameList} = useGameList();
+  const { user, logout } = useAuth();
+  const { getGameList } = useGameList();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [collapsed, _] = useState(false);
@@ -88,7 +88,7 @@ export const DashWrapper: FC = () => {
                 <>
                   <span>Hi,</span>
                   <Link to="/account">
-                    <strong>Francisco</strong>
+                    <strong>{(user !== null) ? user.userName.toUpperCase() : '...'}</strong>
                   </Link>
                   <span>Credit:</span> 
                   <Link to="/account/wallet">

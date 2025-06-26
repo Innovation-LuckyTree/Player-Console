@@ -4,10 +4,10 @@
 import { useState } from "react";
 // import axios from "axios";
 import { getDetailByUserId } from "../../../services/userService";
-import { UserInfoResponse } from "../models/responses/UserInfoResponse";
+import { useUserInfoStore } from "./useUserInfoStore";
 
 export const UserInfo=() => {
-  const [userDetails, setuserDetails] = useState<UserInfoResponse>();
+  const { userInfo, setUserInfo } = useUserInfoStore();
   const [ loading, setLoading] = useState(false);
   const [ error, setError] = useState<string | null>(null);
   
@@ -15,8 +15,7 @@ export const UserInfo=() => {
     setLoading(true);
     try {
       const response = await getDetailByUserId(userId);
-      console.log(response);
-      setuserDetails(response.data);
+      setUserInfo(response.data);
       setError(null);
     } catch (err: any) {
       setError(err.message);
@@ -29,7 +28,7 @@ export const UserInfo=() => {
   return {
     loading,
     error,
-    userDetails,
+    userInfo,
     getUserDetails
   }
 }

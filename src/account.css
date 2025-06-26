@@ -56,6 +56,11 @@
   color: var(--text-dark);
 }
 
+.badge.success {
+  background-color: green;
+  color: var(--text-dark);
+}
+
 .badge.vip {
   background-color: var(--accent1);
   color: var(--text-light);
@@ -183,6 +188,20 @@
   flex: 1;
 }
 
+.form-item-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-item-inline > button { margin-top: 5px; }
+
+.form-label {
+  min-width: 120px;
+  font-weight: 500;
+}
+
 label {
   font-weight: bold;
   margin-bottom: 5px;
@@ -195,6 +214,10 @@ label {
   padding: 5px;
   color: var(--text-dark) !important;
   border-radius: 4px;
+}
+
+.custom-input.ant-input-disabled {
+  color: var(--text-light) !important;
 }
 
 .inline-field {

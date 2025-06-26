@@ -95,3 +95,8 @@
   background-color: var(--accent);
   color: var(--text-dark);
 }
+
+/* custom loader color */
+.custom-spinner .ant-spin-dot-item {
+  background-color: #ff7a00 !important;
+}

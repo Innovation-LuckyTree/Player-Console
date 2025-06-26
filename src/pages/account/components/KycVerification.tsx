@@ -7,6 +7,7 @@ import { VerificationRequest } from '../models/VerificationRequest';
 import { BasicFileUpload } from '../../../shared/components/fileupload/BasicFileUpload';
 import dayjs from "dayjs";
 import { NatureOfWorkList, SalaryRangeList, SourceOfIncomeList } from '../../../utils/enums';
+import { validateAge } from '../../../utils/commonHelpers';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -25,22 +26,6 @@ export const KycVerification: FC<KycVerificationProps> = ({
   const [form] = Form.useForm();
   const [uploadingCount, setUploadingCount] = useState(0);
   const suffixOptions = ["Jr", "Sr", "II", "III", "IV", "V"];
-
-  // Custom validator to check age
-  const validateAge = (_: any, value: any) => {
-    if (!value) {
-      return Promise.reject("Please select your date of birth!");
-    }
-
-    const today = dayjs();
-    const age = today.diff(value, "year");
-
-    if (age < 21) {
-      return Promise.reject("You must be at least 21 years old.");
-    }
-
-    return Promise.resolve();
-  };
 
   const handleVerification: FormProps<VerificationRequest>['onFinish'] = async () => {
     try {

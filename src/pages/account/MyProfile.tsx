@@ -1,23 +1,45 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useState } from "react";
-import { Form, Input, Typography } from "antd";
+import { FC, useEffect, useRef, useState } from "react";
+import { Button, DatePicker, Form, Input, Typography } from "antd";
 import { KycVerification } from "./components/KycVerification";
-import { useAuthStore } from "../../shared/hooks/useAuthStore";
 import { UserInfo } from "./hooks/UserInfo";
+import dayjs from "dayjs";
+import { formatDateTime, formatDateToYMD, validateAge } from "../../utils/commonHelpers";
+
 const { Text } = Typography;
 
 export const MyProfile: FC = () => {
-    const { user } = useAuthStore();
-    const { getUserDetails } = UserInfo();
+    const initialized = useRef(false)
+    const { userInfo } = UserInfo();
+
+    const [form] = Form.useForm();
     const [openVerification, setopenVerification] = useState(false);
 
     const handleVerificationOkay = () => {
         console.log("Successful verifcation");
     }
 
+    const handleSaveChanges = (values: any) => {
+        console.log("Form values to save:", values);
+    };
+
     useEffect(() => {
-        getUserDetails(user?.id??"");
-    }, []);
+        if (!initialized.current) {
+            initialized.current = true;
+
+            form.setFieldsValue({
+                username: userInfo?.fullname,
+                legalName: userInfo?.fullname,
+                realName: userInfo?.fullname,
+                mobileNumber: userInfo?.mobileNumber,
+                email: userInfo?.email,
+                dateOfBirth: userInfo?.birthDate ? dayjs(userInfo.birthDate) : null,
+                registered: formatDateToYMD(userInfo?.createdOn),
+                lastLogin: formatDateTime(userInfo?.createdOn)
+            });
+        }
+    }, [userInfo, form]);
 
   return (
     <>
@@ -25,16 +47,16 @@ export const MyProfile: FC = () => {
     ⚠️ Verify Your Profile Now! <a onClick={() => setopenVerification(true)} href="#">Click Here</a>
     </div>
     <div className="form-section">
-        <Form layout="vertical">
+        <Form layout="vertical" form={form} onFinish={handleSaveChanges}>
             <div className="form-row">
             <div>
                 <Form.Item label="Username" name="username">
-                <Input disabled className="custom-input" />
+                    <Input disabled className="custom-input" />
                 </Form.Item>
             </div>
             <div>
                 <Form.Item label="Legal Name" name="legalName">
-                <Input disabled className="custom-input" />
+                    <Input disabled readOnly className="custom-input" />
                 </Form.Item>
             </div>
             </div>
@@ -42,34 +64,52 @@ export const MyProfile: FC = () => {
             <div className="form-row">
             <div>
                 <Form.Item label="Real Name" name="realName">
-                <Input className="custom-input" />
+                    <Input className="custom-input" />
                 </Form.Item>
             </div>
             <div>
-                <Form.Item label="Contact Number" name="contactNumber">
-                <div className="inline-field">
-                    <Input className="custom-input" />
-                    <button className="small-button">Verify</button>
-                </div>
-                <Text type="secondary" style={{ fontSize: "12px" }}>
-                    Format: +63 9XX XXX XXXX or 09XX XXX XXXX
-                </Text>
+                <div className="form-item-inline">
+                <Form.Item label="Contact Number" name="mobileNumber" className="flex-1">
+                    <Input className="custom-input" 
+                    count={{
+                        max: 11,
+                        strategy: (txt) => txt.length,
+                        exceedFormatter: (txt) => txt.slice(0, 11),
+                    }} 
+                    />
                 </Form.Item>
+                <button className="small-button">Verify</button>
+                </div>
+                {/* <Text type="secondary" style={{ fontSize: "12px" }}>
+                Format: +63 9XX XXX XXXX or 09XX XXX XXXX
+                </Text> */}
             </div>
             </div>
 
             <div className="form-row">
             <div>
-                <Form.Item label="Email" name="email">
-                <div className="inline-field">
-                    <Input className="custom-input" />
+                <div className="form-item-inline">
+                    <Form.Item label="Email" name="email" className="flex-1">
+                        <Input className="custom-input" />
+                    </Form.Item>
                     <button className="small-button">✉</button>
                 </div>
-                </Form.Item>
             </div>
             <div>
-                <Form.Item label="Date of Birth" name="dob">
-                <Input className="custom-input" />
+                <Form.Item
+                label="Date of Birth"
+                name="dateOfBirth"
+                rules={[
+                    { required: true, message: "Please select your date of birth!" },
+                    { validator: validateAge },
+                ]}
+                >
+                <DatePicker
+                    style={{ width: "100%"}}
+                    format="YYYY-MM-DD"
+                    disabledDate={(current) => current && current > dayjs().endOf("day")}
+                    placeholder="Select date of birth"
+                />
                 </Form.Item>
             </div>
             </div>
@@ -88,7 +128,7 @@ export const MyProfile: FC = () => {
             </div>
 
             <div className="save-button">
-            <button className="save-changes-button">Save Changes</button>
+                <Button className="save-changes-button" htmlType="submit">Save Changes</Button>
             </div>
         </Form>
     </div>
