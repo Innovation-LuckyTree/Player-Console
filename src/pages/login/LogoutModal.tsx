@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Modal, Button, Typography } from 'antd';
 import { FC } from 'react';
-import './login.css'
+import '../../modal.css';
 
 const { Text, Title } = Typography;
 

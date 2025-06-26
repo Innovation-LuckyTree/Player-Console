@@ -45,6 +45,32 @@ export const AccountDeposit: FC = () => {
                 </div>
             </div>
 
+            {
+                (method == "bank") &&
+                <div className="bank-summary">
+                    <h3>Bank Account Details</h3>
+                    <div className="form-row">
+                        <div>
+                            <Form.Item label="Bank Name" name="bankName">
+                                <Input placeholder="e.g., BDO, BPI, Metrobank" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                        <div>
+                            <Form.Item label="Account Number" name="accountNumber">
+                                <Input placeholder="Enter account number" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                    </div>
+                    <div className="form-row">
+                        <div>
+                            <Form.Item label="Account Holder Name" name="holderName">
+                                <Input placeholder="Fullname as per bank records" className="custom-input" />
+                            </Form.Item>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <div className="deposit-summary" style={{marginBottom: '10px'}}>
                 <label>Deposit Limits</label>
                 <div style={{ marginTop: "5px" }}></div>

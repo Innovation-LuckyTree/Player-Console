@@ -1,6 +1,12 @@
 import { FC } from "react"
 import '../../App.css'
 import { Tabs, TabsProps } from "antd";
+import { DepositTable } from "./components/DepositTable";
+import { WithdrawalTable } from "./components/WithdrawalTable";
+import { PromoTable } from "./components/PromoTable";
+import { RewardTable } from "./components/RewardTable";
+import { AdjustmentTable } from "./components/AdjustmentTable";
+import { RebateTable } from "./components/RebateTable";
 
 export const AccountStatement: FC =() => {
   
@@ -8,32 +14,32 @@ export const AccountStatement: FC =() => {
     {
       key: '1',
       label: 'DEPOSIT',
-      children: <>Deposit table!</>,
+      children: <DepositTable />,
     },
     {
       key: '2',
       label: 'WITHDRAWAL',
-      children: <>Withdrawal table!</>,
+      children: <WithdrawalTable />,
     },
     {
       key: '3',
       label: 'PROMO APPLY',
-      children: <>Promo apply table!</>,
+      children: <PromoTable />,
     },
     {
       key: '4',
       label: 'REWARDS',
-      children: <>Rewards table!</>,
+      children: <RewardTable />,
     },
     {
       key: '5',
       label: 'ADJUSTMENT',
-      children: <>Ajustment table!</>,
+      children: <AdjustmentTable />,
     },
     {
       key: '6',
       label: 'REBATE',
-      children: <>Rewards table!</>,
+      children: <RebateTable />,
     },
   ];
   const onChange = (key: string) => {
@@ -41,6 +47,9 @@ export const AccountStatement: FC =() => {
   };
 
   return (
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+    <>
+      <div className="deposit-header">STATEMENT</div>
+      <Tabs className="custom-tabs" defaultActiveKey="1" items={items} onChange={onChange} />
+    </>
   )
 }

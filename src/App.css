@@ -52,3 +52,46 @@
 .ant-pagination-next:hover {
   color: var(--primary) !important;
 }
+
+/* custom tab css */
+
+.custom-tabs .ant-tabs-tab {
+  background: transparent;
+  color: var(--text-light);
+  padding: 10px 20px;
+  border-radius: 4px 4px 0 0;
+}
+
+.custom-tabs .ant-tabs-tab-active {
+  background-color: var(--accent);
+  color: var(--text-dark);
+}
+
+.custom-tabs .ant-tabs-ink-bar {
+  background-color: var(--accent);
+}
+
+/* .ant-picker {
+  background-color: var(--bg-darkD) !important;
+  color: var(--text-light) !important;
+} */
+
+.custom-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: var(--text-light) !important;
+}
+
+.small-button1 {
+  background-color: #333;
+  color: var(--text-light);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  /* font-weight: bold; */
+  transition: background 0.3s;
+}
+
+.small-button1.active,
+.small-button1:hover {
+  background-color: var(--accent);
+  color: var(--text-dark);
+}
