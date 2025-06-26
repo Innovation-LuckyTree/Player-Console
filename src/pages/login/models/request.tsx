@@ -9,5 +9,6 @@ export interface RegistrationRequest {
     mobileNumber: string;
     referralCode: string;
     password: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
 };
