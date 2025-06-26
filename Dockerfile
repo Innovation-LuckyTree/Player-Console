@@ -23,6 +23,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built React app
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+ENV VITE_API_GATEWAY_BASE_URL = https://dev-console-api.gaminginthesky.net/api
 # Copy custom nginx config (optional)
 # COPY nginx.conf /etc/nginx/nginx.conf
 
