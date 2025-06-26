@@ -58,7 +58,7 @@
 
 .badge.success {
   background-color: green;
-  color: var(--text-dark);
+  color: white;
 }
 
 .badge.vip {

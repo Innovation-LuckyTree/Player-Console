@@ -1,23 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useRef, useState } from "react";
-import { Button, DatePicker, Form, Input, Typography } from "antd";
+import { FC, useEffect, useState } from "react";
+import { Button, DatePicker, Form, Input } from "antd";
 import { KycVerification } from "./components/KycVerification";
 import { UserInfo } from "./hooks/UserInfo";
 import dayjs from "dayjs";
 import { formatDateTime, formatDateToYMD, validateAge } from "../../utils/commonHelpers";
+import { useAuthStore } from "../../shared/hooks/useAuthStore";
 
-const { Text } = Typography;
+// const { Text } = Typography;
 
 export const MyProfile: FC = () => {
-    const initialized = useRef(false)
-    const { userInfo } = UserInfo();
+    const { user } = useAuthStore();
+    const { userInfo, getUserDetails } = UserInfo();
 
     const [form] = Form.useForm();
     const [openVerification, setopenVerification] = useState(false);
 
     const handleVerificationOkay = () => {
-        console.log("Successful verifcation");
+        getUserDetails(user?.id??"");
     }
 
     const handleSaveChanges = (values: any) => {
@@ -25,20 +26,16 @@ export const MyProfile: FC = () => {
     };
 
     useEffect(() => {
-        if (!initialized.current) {
-            initialized.current = true;
-
-            form.setFieldsValue({
-                username: userInfo?.fullname,
-                legalName: userInfo?.fullname,
-                realName: userInfo?.fullname,
-                mobileNumber: userInfo?.mobileNumber,
-                email: userInfo?.email,
-                dateOfBirth: userInfo?.birthDate ? dayjs(userInfo.birthDate) : null,
-                registered: formatDateToYMD(userInfo?.createdOn),
-                lastLogin: formatDateTime(userInfo?.createdOn)
-            });
-        }
+        form.setFieldsValue({
+            username: userInfo?.userName,
+            legalName: userInfo?.fullname,
+            realName: userInfo?.fullname,
+            mobileNumber: userInfo?.mobileNumber,
+            email: userInfo?.email,
+            dateOfBirth: userInfo?.birthDate ? dayjs(userInfo.birthDate) : null,
+            registered: formatDateToYMD(userInfo?.createdOn),
+            lastLogin: formatDateTime(userInfo?.createdOn)
+        });
     }, [userInfo, form]);
 
   return (

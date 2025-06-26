@@ -7,10 +7,12 @@ import styles from './basicFileUpload.module.css';
 import { UploadOutlined, CameraOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import SelfieUpload from './SelfieUpload';
+import { UploadPayload } from './models/UploadPayload';
+import { uploadImageString } from '../../../services/uploadService';
 
 interface DragDropProps {
   label: string;
-  callBack: (data: { status: 'start' | 'done' | 'error'; url?: string }) => void;
+  callBack: (data: { status: 'start' | 'done' | 'error'; url?: string, data?: string; label?: string }) => void;
 }
 
 export const BasicFileUpload: React.FC<DragDropProps> = ({ label, callBack }) => {
@@ -46,7 +48,13 @@ export const BasicFileUpload: React.FC<DragDropProps> = ({ label, callBack }) =>
         const reader = new FileReader();
         reader.readAsDataURL(compressed);
         reader.onloadend = () => {
-          callBack({ status: 'done', url: previewFile.preview });
+          const payload: UploadPayload = {
+            base64Image: reader.result as string
+          };
+
+          uploadImageString(payload).then((resp) => {
+            callBack({ status: 'done', url: previewFile.preview, data: resp.data, label: label });
+          })
         };
       } catch (error) {
         console.error('Compression failed:', error);

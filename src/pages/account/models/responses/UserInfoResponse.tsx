@@ -9,9 +9,11 @@ export interface UserInfoResponse {
   salaryRange: number;
   refferralKey: string;
   refferralCode: string;
+  userName: string;
   firstName: string;
   lastName: string;
   middleName: string;
+  suffix: string;
   email: string;
   natureOfWork: string;
   sourceOfIncome: string;
@@ -23,7 +25,7 @@ export interface UserInfoResponse {
   profilePath: string;
   selfiePath: string;
   createdOn: string;
-  isVerified: boolean;
+  isVerified: number;
   isActive: boolean;
   roleId: number;
 }

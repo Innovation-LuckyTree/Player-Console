@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Modal, Form, FormProps, message, Spin, Input, Typography, DatePicker, Button, Select  } from 'antd';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import '../../../modal.css';
 import { VerificationRequest } from '../models/VerificationRequest';
 import { BasicFileUpload } from '../../../shared/components/fileupload/BasicFileUpload';
 import dayjs from "dayjs";
 import { NatureOfWorkList, SalaryRangeList, SourceOfIncomeList } from '../../../utils/enums';
-import { validateAge } from '../../../utils/commonHelpers';
+import { formatDateToYMD, validateAge } from '../../../utils/commonHelpers';
+import { UserInfo } from '../hooks/UserInfo';
+import { basicVerification } from '../../../services/userService';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -23,41 +25,52 @@ export const KycVerification: FC<KycVerificationProps> = ({
   handleOk,
   handleCancel,
 }) => {
+  const { userInfo } = UserInfo();
   const [form] = Form.useForm();
-  const [uploadingCount, setUploadingCount] = useState(0);
+  const [loadingCount, setloadingCount] = useState(0);
   const suffixOptions = ["Jr", "Sr", "II", "III", "IV", "V"];
 
   const handleVerification: FormProps<VerificationRequest>['onFinish'] = async () => {
     try {
-      // const values = await form.validateFields();
+      const values = await form.validateFields();
+      const payload: VerificationRequest = {
+        accountObjectId: userInfo?.accountObjectId as string,
+        firstName: values.firstName,
+        middleName: values.middleName,
+        lastName: values.lastName,
+        suffix: values.suffix,
+        mobileNumber: values.mobileNumber,
+        birthDate: formatDateToYMD(values.birthDate),
+        natureOfWork: values.natureOfWork,
+        sourceOfIncome: values.sourceOfIncome,
+        salaryRange: values.salaryRange,
+        frontIdPath: "",
+        selfiePath: "",
+        backIdPath: ""
+      }
 
-      const verificationRequest: VerificationRequest = {
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        suffix: '',
-        mobileNumber: '',
-        dateOfBirt: '',
-        idFront: '',
-        idBack: '',
-        selfie: '',
-        occupation: '',
-        sourceOfIncome: '',
-        monthlyIncome: '',
-      };
-
-      console.log(verificationRequest);
-      handleOk();
+      setloadingCount(1);
+      try {
+        await basicVerification(payload);
+        handleOk();
+        handleCancel();
+      } catch (err: any) {
+        setloadingCount(0);
+        console.log(err);
+      } finally {
+        setloadingCount(0);
+      }
+      // handleOk();
     } catch (e) {
       message.error('Something went wrong.');
     }
   };
 
-  const handleUploadCallback = (data: { status: 'start' | 'done' | 'error'; url?: string }) => {
+  const handleUploadCallback = (data: { status: 'start' | 'done' | 'error'; url?: string; data?: string; label?: string }) => {
     if (data.status === 'start') {
-      setUploadingCount((prev) => prev + 1);
+      setloadingCount((prev) => prev + 1);
     } else {
-      setUploadingCount((prev) => Math.max(prev - 1, 0));
+      setloadingCount((prev) => Math.max(prev - 1, 0));
 
       if (data.status === 'done') {
         console.log('Upload successful:', data.url);
@@ -67,7 +80,23 @@ export const KycVerification: FC<KycVerificationProps> = ({
     }
   };
 
-  const isUploading = uploadingCount > 0;
+  const isloading = loadingCount > 0;
+
+  useEffect(() => {
+    if (isModalOpen && userInfo) {
+      form.setFieldsValue({
+        firstName: userInfo?.firstName ?? '',
+        middleName: userInfo?.middleName ?? '',
+        lastName: userInfo?.lastName ?? '',
+        suffix: userInfo?.suffix ?? undefined,
+        mobileNumber: userInfo?.mobileNumber ?? '',
+        birthDate: userInfo?.birthDate ? dayjs(userInfo?.birthDate) : null,
+        natureOfWork: userInfo?.natureOfWork ?? undefined,
+        sourceOfIncome: userInfo?.sourceOfIncome ?? undefined,
+        salaryRange: userInfo?.salaryRange ?? undefined,
+      });
+    }
+  }, [isModalOpen, userInfo, form]);
 
   return (
     <Modal
@@ -83,7 +112,7 @@ export const KycVerification: FC<KycVerificationProps> = ({
         <Text style={{ color: '#ccc' }}>Complete your verification to become a fully verified player</Text>
       </div>
       <Form form={form}  onFinish={handleVerification} layout="vertical" style={{ marginTop: 24 }}>
-        <Spin spinning={isUploading} tip="Uploading...">
+        <Spin spinning={isloading} tip="Uploading...">
           <h3>Personal Information</h3>
           <div style={{display:'flex', gap:'10px'}}>
               <Form.Item label="First Name" name="firstName" 
@@ -136,7 +165,7 @@ export const KycVerification: FC<KycVerificationProps> = ({
             </Form.Item>
             <Form.Item
               label="Date of Birth"
-              name="dateOfBirth"
+              name="birthDate"
               rules={[
                 { required: true, message: "Please select your date of birth!" },
                 { validator: validateAge },
@@ -159,7 +188,7 @@ export const KycVerification: FC<KycVerificationProps> = ({
 
           <h3>Professional Information</h3>
           <div style={{display:'flex', gap:'10px'}}>
-              <Form.Item label="Occupation" name="occupation" style={{ width: "100%" }}
+              <Form.Item label="Occupation" name="natureOfWork" style={{ width: "100%" }}
               rules={[{ required: true, message: 'Please select occupation' }]}>
                 <Select placeholder="Select Occupation" allowClear showSearch optionFilterProp="children" >
                   {NatureOfWorkList().map((item) => (
@@ -179,11 +208,11 @@ export const KycVerification: FC<KycVerificationProps> = ({
                   ))}
                 </Select>
               </Form.Item>
-              <Form.Item label="Monthly Income" name="monthlyIncome" style={{ width: "100%" }}
+              <Form.Item label="Monthly Income" name="salaryRange" style={{ width: "100%" }}
               rules={[{ required: true, message: 'Please select salary' }]}>
                 <Select placeholder="Select Salary" allowClear>
-                  {SalaryRangeList().map((item) => (
-                    <Option key={item} value={item}>
+                  {SalaryRangeList().map((item, index) => (
+                    <Option key={index} value={index}>
                       {item}
                     </Option>
                   ))}
