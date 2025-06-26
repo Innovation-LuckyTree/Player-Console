@@ -1,14 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Form, Input, Typography } from "antd";
+import { KycVerification } from "./components/KycVerification";
 const { Text } = Typography;
 
 export const MyProfile: FC = () => {
 
+    const [openVerification, setopenVerification] = useState(false);
+
+    const handleVerificationOkay = () => {
+        console.log("Successful verifcation");
+    }
   return (
     <>
     <div className="verify-banner">
-    ⚠️ Verify Your Profile Now! <a href="#">Click Here</a>
+    ⚠️ Verify Your Profile Now! <a onClick={() => setopenVerification(true)} href="#">Click Here</a>
     </div>
     <div className="form-section">
         <Form layout="vertical">
@@ -78,6 +84,8 @@ export const MyProfile: FC = () => {
             </div>
         </Form>
     </div>
+
+    <KycVerification isModalOpen={openVerification} handleOk={handleVerificationOkay} handleCancel={() => setopenVerification(false)} />
     </>
   )
 }

@@ -14,6 +14,7 @@ import { AccountDeposit } from './pages/deposit/AccountDeposit'
 import { AccountWithdrawal } from './pages/withdrawal/AccountWithdrawal'
 import { PromoCenter } from './pages/promotion/PromoCenter'
 import { AccountStatement } from './pages/statement/AccountStatement'
+import { BetHistory } from './pages/bet-history/BetHistory'
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
           <Route path="/account/deposit" element={<AccountDeposit />}/>
           <Route path="/account/withdrawal" element={<AccountWithdrawal />}/>
           <Route path="/account/promo-center" element={<PromoCenter />}/>
-          <Route path="/account/bet-history" element={<AccountDeposit />}/>
+          <Route path="/account/bet-history" element={<BetHistory />}/>
           <Route path="/account/statement" element={<AccountStatement />}/>
         </Route>
         <Route path="/game/:gameId" element={<GameWrapper />}/>

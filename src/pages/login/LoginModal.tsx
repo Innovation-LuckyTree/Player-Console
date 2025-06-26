@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Modal, Form, Input, Button, Checkbox, Typography, FormProps, message } from 'antd';
 import { FC } from 'react';
-import './login.css'
+import '../../modal.css';
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginRequest } from './models/request';
 import { useAuth } from '../../shared/hooks/useAuth';
