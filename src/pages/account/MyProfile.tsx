@@ -1,16 +1,24 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Form, Input, Typography } from "antd";
 import { KycVerification } from "./components/KycVerification";
+import { useAuthStore } from "../../shared/hooks/useAuthStore";
+import { UserInfo } from "./hooks/UserInfo";
 const { Text } = Typography;
 
 export const MyProfile: FC = () => {
-
+    const { user } = useAuthStore();
+    const { getUserDetails } = UserInfo();
     const [openVerification, setopenVerification] = useState(false);
 
     const handleVerificationOkay = () => {
         console.log("Successful verifcation");
     }
+
+    useEffect(() => {
+        getUserDetails(user?.id??"");
+    }, []);
+
   return (
     <>
     <div className="verify-banner">

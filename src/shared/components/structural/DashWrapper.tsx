@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react"
 import { Button, Layout, message } from "antd"
 import { MainMenu } from "./MainMenu"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
 import { useAuthStore } from "../../hooks/useAuthStore"
 import { useAuth } from "../../hooks/useAuth"
@@ -17,6 +17,7 @@ import { useGameList } from "../../../pages/dashboard/hooks/useGameList"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
+  const navigate = useNavigate();
   const { logout } = useAuth();
   const {getGameList} = useGameList();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -89,11 +90,14 @@ export const DashWrapper: FC = () => {
                   <Link to="/account">
                     <strong>Francisco</strong>
                   </Link>
-                  <span>Credit:</span> <span className="credit">PHP 1250.43</span>
+                  <span>Credit:</span> 
+                  <Link to="/account/wallet">
+                    <span className="credit">PHP 1250.43</span>
+                  </Link>
                   <DollarOutlined />
                   <Button className="btn"><NotificationFilled /></Button>
-                  <Button className="btn">Withdrawal</Button>
-                  <Button className="btn btn-orange">Deposit</Button>
+                  <Button className="btn" onClick={() => navigate("/account/withdrawal")}>Withdrawal</Button>
+                  <Button className="btn btn-orange" onClick={() => navigate("/account/deposit")}>Deposit</Button>
                   <Button onClick={() => setopenLogout(true)} className="btn">LOGOUT</Button>
                 </>
               }

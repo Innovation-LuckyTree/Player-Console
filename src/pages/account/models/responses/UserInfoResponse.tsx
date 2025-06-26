@@ -1,0 +1,29 @@
+export interface UserInfoResponse {
+  accountInfoId: string;
+  accountCreditId: string;
+  accountObjectId: string;
+  accountBonusId: string;
+  userId: string;
+  fullname: string;
+  branchId: number;
+  salaryRange: number;
+  refferralKey: string;
+  refferralCode: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  email: string;
+  natureOfWork: string;
+  sourceOfIncome: string;
+  birthDate: string;
+  mobileNumber: string;
+  frontIdPath: string;
+  backIdPath: string;
+  signaturePath: string;
+  profilePath: string;
+  selfiePath: string;
+  createdOn: string;
+  isVerified: boolean;
+  isActive: boolean;
+  roleId: number;
+}

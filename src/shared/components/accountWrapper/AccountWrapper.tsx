@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC } from "react"
 import { Layout } from "antd"
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import { TopSideBar } from "./TopSideBar"
 import { MenuSideBar } from "./MenuSideBar"
 import { ContentHeader } from "./ContentHeader"
-// import { useAuthStore } from "../../hooks/useAuthStore"
+import { useAuthStore } from "../../hooks/useAuthStore"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const AccountWrapper: FC = () => {
-//   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/login" replace />;
-  // }
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <>
