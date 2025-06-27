@@ -1,14 +1,15 @@
 export interface VerificationRequest {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  suffix: string;
+  accountObjectId: string;
   mobileNumber: string;
-  dateOfBirt: string;
-  idFront: string;
-  idBack: string;
-  selfie: string;
-  occupation: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  suffix: string;
+  natureOfWork: string;
   sourceOfIncome: string;
-  monthlyIncome: string;
+  birthDate: string;
+  salaryRange: string;
+  frontIdPath: string;
+  selfiePath: string;
+  backIdPath: string;
 }
