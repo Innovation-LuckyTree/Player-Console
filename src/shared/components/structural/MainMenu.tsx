@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useState, useEffect } from "react"
-import { getSideMenu } from "../../../app/appRoutes"
+import { FC, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { Link } from "react-router-dom";
 import { CategoryMenu } from "./CategoryMenu";

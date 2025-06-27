@@ -1,6 +1,6 @@
 import { GameModel } from "../../../shared/types/GameModel";
 import { CategoryModel } from "../../../shared/types/CategoryModel";
-import { CategoryMenuItem, GameProviderItem } from "../../../shared/types/CategoryMenuItem";
+import { GameProviderItem } from "../../../shared/types/CategoryMenuItem";
 
 export interface GetGameListResponse{
     games: GameModel[],

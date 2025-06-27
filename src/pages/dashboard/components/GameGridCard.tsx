@@ -20,7 +20,7 @@ export const GameGridCard: FC<GameGridCardProps> =({game}) => {
             <img src={game.coverImage?? default_logo} className="w-full h-full absolute" style={{top:0,left:0}}/>
             {
                 (isAuthenticated) ?
-                <Link to={`/game/${game.gameObjectId}`}>
+                <Link to={`/game/${game.externalGameId}`}>
                     <button className="game-grid-play-btn">PLAY</button>
                 </Link>
                 : <button onClick={() => handleNotLogin()} className="game-grid-play-btn">PLAY</button>
