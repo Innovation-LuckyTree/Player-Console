@@ -37,7 +37,7 @@ function App() {
           <Route path="/account/statement" element={<AccountStatement />}/>
         </Route>
         <Route path="/game/:gameId" element={<GameWrapper />}/>
-        <Route path="live-casino/game/s/:gameName" element={<GameSpecialWrapper />}/>
+        <Route path="game/s/:gameName" element={<GameSpecialWrapper />}/>
       </Routes>
     </ConfigProvider>
   )

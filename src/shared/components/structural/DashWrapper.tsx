@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import { Button, Layout, message } from "antd"
 import { MainMenu } from "./MainMenu"
 import { Link, Outlet, useNavigate } from "react-router-dom"
@@ -13,13 +13,11 @@ import { LoginModal } from "../../../pages/login/LoginModal"
 import { RegistrationModal } from "../../../pages/login/RegistrationModal"
 import { ForgotPassword } from "../../../pages/login/ForgotPassword"
 import { LogoutModal } from "../../../pages/login/LogoutModal"
-import { useGameList } from "../../../pages/dashboard/hooks/useGameList"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { getGameList } = useGameList();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [collapsed, _] = useState(false);
@@ -56,11 +54,6 @@ export const DashWrapper: FC = () => {
   // if (!isAuthenticated) {
   //   return <Navigate to="/login" replace />;
   // }
-
-  useEffect(() => {
-    getGameList();
-  },[])
-
   return (
     <>
       <Layout className="h-screen">

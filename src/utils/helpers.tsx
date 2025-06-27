@@ -1,6 +1,7 @@
 
 import { Modal } from "antd";
 import { GAME_TYPES } from "./consts";
+import { HomeFilled } from "@ant-design/icons";
 
 //CARD HELPER LOGICS
 function rankCombination(combo: string): number[] {
@@ -116,3 +117,37 @@ export const getGameImage = (gameName: string): string => {
 
   return images['Book-Of-Kingdoms.png'] as string; // fallback if image not found
 };
+
+export const convertNameToUrl = (name:string) => {
+  return "/"+name.replace(" ", "-").toLocaleLowerCase();
+}
+
+export const getCategoryIcon = (name:string) => {
+  switch(name){
+    case "Home":
+      return <HomeFilled />;
+
+    case "Sports Games":
+      return  <span role="img" aria-label="trophy">🏆</span>;
+      
+    case "Live Casino":
+      return  <span role="img" aria-label="trophy">🎥</span>;
+      
+    case "Slots":
+      return  <span role="img" aria-label="trophy">🎰</span>;
+      
+    case "Cards":
+      return  <span role="img" aria-label="trophy">🃏</span>;
+      
+    case "Fishing Games":
+      return  <span role="img" aria-label="trophy">🐟</span>;
+      
+    case "Esports":
+      return  <span role="img" aria-label="trophy">🎮</span>;
+      
+    case "Cock Fighting":
+      return  <span role="img" aria-label="trophy">🐓</span>;
+      
+  }
+  
+}

@@ -8,12 +8,20 @@ import * as gameService from "./../../../services/gamesService";
 export const useGameList=() => {
   const { gameList, count, setGameList } = useGameListStore();
   const [ loading, setLoading] = useState(false);
+  const [ currentPageNumber, setCurrentPageNumber] = useState<number>(1);
+  const [ selectedGameCategoryId, setSelectedGameCategoryId] = useState<number>(0);
+  const [ selectedGameProviderId, setSelectedGameProviderId] = useState<number>(0);
   const [ error, setError] = useState<string | null>(null);
       
-  const getGameList = async () => {
+  const getGameList = async (gameCategoryId: number, gameProviderId: number) => {
     setLoading(true);
     try {
-      const response = await gameService.getGameList();
+      if(!(gameCategoryId == selectedGameCategoryId && gameProviderId == selectedGameProviderId)){;
+        setSelectedGameCategoryId(gameCategoryId);
+        setSelectedGameProviderId(gameProviderId);
+        setCurrentPageNumber(1);
+      }
+      const response = await gameService.getGameList(gameCategoryId, gameProviderId, currentPageNumber);
       setGameList(response.data.games, response.data.count);
       setError(null);
     } catch (err: any) {

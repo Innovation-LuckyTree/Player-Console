@@ -9,3 +9,10 @@ export interface CategoryMenuItem {
   gameType: string;
   isAvailable: number;
 }
+
+export interface GameProviderItem {
+  gameProviderId: number;
+  name: string;
+  description: string;
+  coverImage: string;
+}

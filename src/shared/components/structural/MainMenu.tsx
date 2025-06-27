@@ -4,52 +4,43 @@ import { getSideMenu } from "../../../app/appRoutes"
 import { useLocation } from "react-router-dom"
 import { Link } from "react-router-dom";
 import { CategoryMenu } from "./CategoryMenu";
+import { useGameCategories } from "../../hooks/useGameCategories";
+import { convertNameToUrl, getCategoryIcon } from "../../../utils/helpers";
 
 interface MainMenuProps {
   collapsed: boolean
 }
 
-// Dummy menu item type, replace with your actual type if needed
-interface MenuItem {
-  key: string;
-  icon: React.ReactNode;
-  label: string;
-}
-
 export const MainMenu: FC<MainMenuProps> =() => {
+  const {categoryList, fetchCategories, activeKey, setActiveKey} = useGameCategories();
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const [activeKey, setActiveKey] = useState("");
 
   useEffect(() => {
     // Automatically set active menu based on the current path
-    const topLevelPath = "/" + currentPath.split("/")[1];
-    setActiveKey(topLevelPath);
+    fetchCategories();
   }, [currentPath]);
-
-  const sideMenu: MenuItem[] = getSideMenu().filter(
-    (item): item is MenuItem => item != null && typeof item.key === "string"
-  );
 
   return (
     <>
       <nav className="main-menu">
         <ul>
-          {sideMenu.map((item) => {
+          {categoryList?.map((item) => {
+            var url = convertNameToUrl(item.name);
             const isActive =
-              item.key === "/"
+              url === "/"
                 ? currentPath === "/"
-                : currentPath.startsWith(item.key);
+                : currentPath.startsWith(url);
 
             return (
-              <Link to={item.key} key={item.key}>
+              <Link to={url} key={url}>
                 <li
-                  onClick={() => setActiveKey(item.key)}
+                  onClick={() => setActiveKey(item.gameCategoryId)}
                   className={isActive ? "active" : ""}
                 >
-                  <span className="icon">{item.icon}</span>
-                  <span className="txt">{item.label}</span>
+                  <span className="icon">{getCategoryIcon(item.description)}</span>
+                  <span className="txt">{item.description}</span>
                 </li>
               </Link>
             );
@@ -57,7 +48,7 @@ export const MainMenu: FC<MainMenuProps> =() => {
         </ul>
       </nav>
 
-      <CategoryMenu menuName={activeKey}/>
+      <CategoryMenu gameCategoryId={activeKey}/>
     </>
   )
 }

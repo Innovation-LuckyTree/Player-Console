@@ -5,7 +5,7 @@ export interface CategoryIconProp{
     isAvailable?: number;
 }
 
-export const CategoryIcon: FC<CategoryIconProp> =({label, isAvailable}) => {
+export const CategoryIcon: FC<CategoryIconProp> =({label, isAvailable=true}) => {
     return (
         <>
             <div className={`category-ext-icon-wrapper ${isAvailable ? "": "unavailable"}`}>

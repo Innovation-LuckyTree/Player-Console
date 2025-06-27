@@ -34,8 +34,8 @@ export const DashboardPage: FC =() => {
       <div className="game-row">
         {
           !loading ?
-            paginatedGames.map((game,index) => (
-              <GameGridCard title={game.gameName} description={game.gameType} id={game.gameId} key={index}/>
+            paginatedGames.map((game) => (
+              <GameGridCard game={game} key={game.gameId}/>
             ))
             :
             Array.from({ length: 6 }).map((_, index) => (
