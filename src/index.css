@@ -617,6 +617,17 @@ body {
     padding: 10px;
     text-align: center;
   }
+
+  .game-row {
+    justify-content: center;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .game-grid-card {
+    width: calc(33.33% - 10px); /* 3 per row, minus the gap */
+    min-width: 100px;
+  }
 }
 
 
@@ -630,5 +641,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(90deg) scale(1.33);
+  }
+}
+
+@media (max-width: 480px) {
+  .game-grid-card {
+    width: calc(50% - 10px); /* 2 per row for very small screens */
   }
 }

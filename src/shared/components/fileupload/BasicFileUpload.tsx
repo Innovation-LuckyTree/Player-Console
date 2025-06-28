@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import imageCompression from 'browser-image-compression';
 import styles from './basicFileUpload.module.css';
 import { UploadOutlined, CameraOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import SelfieUpload from './SelfieUpload';
 import { UploadPayload } from './models/UploadPayload';
 import { uploadImageString } from '../../../services/uploadService';
@@ -54,7 +54,25 @@ export const BasicFileUpload: React.FC<DragDropProps> = ({ label, callBack }) =>
 
           uploadImageString(payload).then((resp) => {
             callBack({ status: 'done', url: previewFile.preview, data: resp.data, label: label });
-          })
+          }).catch((error) => {
+            if (error.response) {
+              // Server responded with a status code outside 2xx
+              const status = error.response.status;
+              if (status === 400) {
+                message.error('Bad request (400). Please check your input.');
+              } else if (status === 404) {
+                message.error('Resource not found (404).');
+              } else {
+                message.error(`Unexpected error (${status}).`);
+              }
+            } else if (error.request) {
+              // Request was made but no response
+              message.error('No response from server.');
+            } else {
+              // Something else happened
+              message.error(`Error: ${error.message}`);
+            }
+          });
         };
       } catch (error) {
         console.error('Compression failed:', error);
@@ -79,7 +97,7 @@ export const BasicFileUpload: React.FC<DragDropProps> = ({ label, callBack }) =>
         <div className={styles.dropzone} {...getRootProps()} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <input {...getInputProps()} />
 
-          <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color:'white' }}>
+          <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color:'white', cursor:'pointer' }}>
             {file ? (
               <img src={file.preview} alt="preview" className={styles.previewImage} />
             ) : (
@@ -106,7 +124,7 @@ export const BasicFileUpload: React.FC<DragDropProps> = ({ label, callBack }) =>
             </Button>
           )}
         </div>
-        <p className={styles.label}>{label}</p>
+        <p className={styles.label}>{label} <span style={{color:'#ff4d4f',fontSize:'20px'}}>*</span></p>
       </div>
 
       {

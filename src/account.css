@@ -39,6 +39,13 @@
   font-weight: bold;
 }
 
+.avatar > img {
+  object-fit: cover;
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+}
+
 .profile-info .name {
   margin-top: 8px;
   font-weight: bold;
