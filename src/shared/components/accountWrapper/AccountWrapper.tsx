@@ -13,13 +13,12 @@ export const AccountWrapper: FC = () => {
   
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const initialized = useRef(false)
-  const { user } = useAuthStore();
   const { getUserDetails, loading } = UserInfo();
 
   useEffect(() => {
     if (!initialized.current) {
         initialized.current = true;
-        getUserDetails(user?.id??"");
+        getUserDetails();
     }
   }, []);
 

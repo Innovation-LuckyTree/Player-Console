@@ -28,4 +28,5 @@ export interface UserInfoResponse {
   isVerified: number;
   isActive: boolean;
   roleId: number;
+  LastPasswordChange: string;
 }

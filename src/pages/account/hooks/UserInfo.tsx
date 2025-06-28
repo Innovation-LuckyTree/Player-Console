@@ -3,18 +3,18 @@
 
 import { useState } from "react";
 // import axios from "axios";
-import { getDetailByUserId } from "../../../services/userService";
 import { useUserInfoStore } from "./useUserInfoStore";
+import { getCurrentInfo } from "../../../services/accountService";
 
 export const UserInfo=() => {
   const { userInfo, setUserInfo } = useUserInfoStore();
   const [ loading, setLoading] = useState(false);
   const [ error, setError] = useState<string | null>(null);
   
-  const getUserDetails = async (userId: string) => {
+  const getUserDetails = async () => {
     setLoading(true);
     try {
-      const response = await getDetailByUserId(userId);
+      const response = await getCurrentInfo();
       setUserInfo(response.data);
       setError(null);
     } catch (err: any) {

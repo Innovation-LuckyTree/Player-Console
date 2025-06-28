@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { UserInfoResponse } from '../models/responses/UserInfoResponse';
+import { AccountResponse } from '../models/responses/AccountResponse';
 
 interface UserInfoState {
-  userInfo: UserInfoResponse | null;
-  setUserInfo: ( userInfo: UserInfoResponse) => void;
+  userInfo: AccountResponse | null;
+  setUserInfo: ( userInfo: AccountResponse) => void;
 }
 
 export const useUserInfoStore = create<UserInfoState>()(
