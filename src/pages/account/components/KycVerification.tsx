@@ -49,7 +49,7 @@ export const KycVerification: FC<KycVerificationProps> = ({
 
       const values = await form.validateFields();
       const payload: VerificationRequest = {
-        accountObjectId: userInfo?.accountObjectId as string,
+        accountObjectId: userInfo?.accountInfo.accountObjectId as string,
         firstName: values.firstName,
         middleName: values.middleName,
         lastName: values.lastName,
@@ -106,15 +106,15 @@ export const KycVerification: FC<KycVerificationProps> = ({
   useEffect(() => {
     if (isModalOpen && userInfo) {
       form.setFieldsValue({
-        firstName: userInfo?.firstName ?? '',
-        middleName: userInfo?.middleName ?? '',
-        lastName: userInfo?.lastName ?? '',
-        suffix: userInfo?.suffix ?? undefined,
-        mobileNumber: userInfo?.mobileNumber ?? '',
-        birthDate: userInfo?.birthDate ? dayjs(userInfo?.birthDate) : null,
-        natureOfWork: userInfo?.natureOfWork ?? undefined,
-        sourceOfIncome: userInfo?.sourceOfIncome ?? undefined,
-        salaryRange: userInfo?.salaryRange ?? undefined,
+        firstName: userInfo?.accountInfo.firstName ?? '',
+        middleName: userInfo?.accountInfo.middleName ?? '',
+        lastName: userInfo?.accountInfo.lastName ?? '',
+        suffix: userInfo?.accountInfo.suffix ?? undefined,
+        mobileNumber: userInfo?.accountInfo.mobileNumber ?? '',
+        birthDate: userInfo?.accountInfo.birthDate ? dayjs(userInfo?.accountInfo.birthDate) : null,
+        natureOfWork: userInfo?.accountInfo.natureOfWork ?? undefined,
+        sourceOfIncome: userInfo?.accountInfo.sourceOfIncome ?? undefined,
+        salaryRange: userInfo?.accountInfo.salaryRange ?? undefined,
       });
     }
   }, [isModalOpen, userInfo, form]);

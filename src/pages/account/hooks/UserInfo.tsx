@@ -15,7 +15,7 @@ export const UserInfo=() => {
     setLoading(true);
     try {
       const response = await getCurrentInfo();
-      setUserInfo(response.data);
+      setUserInfo(response);
       setError(null);
     } catch (err: any) {
       setError(err.message);

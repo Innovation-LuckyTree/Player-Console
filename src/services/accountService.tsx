@@ -4,8 +4,8 @@ import { CreditBalanceResponse } from "../pages/account/models/responses/CreditB
 import { ApiResponse } from "../shared/types/ApiResponse";
 import apiClient from "./apiClient";
 
-export const getCurrentInfo = (): Promise<ApiResponse<AccountResponse>>  => {
-  return apiClient.get<ApiResponse<AccountResponse>>(`/api/account/current`).then((resp) => resp.data);
+export const getCurrentInfo = (): Promise<AccountResponse>  => {
+  return apiClient.get<AccountResponse>(`/api/account/current`).then((resp) => resp.data);
 };
 
 export const getCreditBalance = (accountCreditId: string): Promise<ApiResponse<CreditBalanceResponse>>  => {

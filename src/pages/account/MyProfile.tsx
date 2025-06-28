@@ -6,19 +6,17 @@ import { KycVerification } from "./components/KycVerification";
 import { UserInfo } from "./hooks/UserInfo";
 import dayjs from "dayjs";
 import { formatDateTime, formatDateToYMD, validateAge } from "../../utils/commonHelpers";
-import { useAuthStore } from "../../shared/hooks/useAuthStore";
 
 // const { Text } = Typography;
 
 export const MyProfile: FC = () => {
-    const { user } = useAuthStore();
     const { userInfo, getUserDetails } = UserInfo();
 
     const [form] = Form.useForm();
     const [openVerification, setopenVerification] = useState(false);
 
     const handleVerificationOkay = () => {
-        getUserDetails(user?.id??"");
+        getUserDetails();
     }
 
     const handleSaveChanges = (values: any) => {
@@ -27,14 +25,14 @@ export const MyProfile: FC = () => {
 
     useEffect(() => {
         form.setFieldsValue({
-            username: userInfo?.userName,
-            legalName: userInfo?.fullname,
-            realName: userInfo?.fullname,
-            mobileNumber: userInfo?.mobileNumber,
-            email: userInfo?.email,
-            dateOfBirth: userInfo?.birthDate ? dayjs(userInfo.birthDate) : null,
-            registered: formatDateToYMD(userInfo?.createdOn),
-            lastLogin: formatDateTime(userInfo?.createdOn)
+            username: userInfo?.accountInfo.userName,
+            legalName: userInfo?.accountInfo.fullName,
+            realName: userInfo?.accountInfo.fullName,
+            mobileNumber: userInfo?.accountInfo.mobileNumber,
+            email: userInfo?.accountInfo.email,
+            dateOfBirth: userInfo?.accountInfo.birthDate ? dayjs(userInfo.accountInfo.birthDate) : null,
+            registered: formatDateToYMD(userInfo?.accountInfo.dateCreated),
+            lastLogin: formatDateTime(userInfo?.accountInfo.lastPasswordChange)
         });
     }, [userInfo, form]);
 
