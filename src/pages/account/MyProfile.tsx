@@ -61,7 +61,7 @@ export const MyProfile: FC = () => {
             <div className="form-row">
             <div>
                 <Form.Item label="Real Name" name="realName">
-                    <Input className="custom-input" />
+                    <Input disabled className="custom-input" />
                 </Form.Item>
             </div>
             <div>

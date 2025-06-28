@@ -28,10 +28,25 @@ export const KycVerification: FC<KycVerificationProps> = ({
   const { userInfo } = UserInfo();
   const [form] = Form.useForm();
   const [loadingCount, setloadingCount] = useState(0);
+  const [frontIdFileName, setfrontIdFileName] = useState("");
+  const [backIdFileName, setbackIdFileName] = useState("");
+  const [selfieFileName, setselfieFileName] = useState("");
   const suffixOptions = ["Jr", "Sr", "II", "III", "IV", "V"];
 
   const handleVerification: FormProps<VerificationRequest>['onFinish'] = async () => {
     try {
+      
+      // validate image upload
+      if (!frontIdFileName || !backIdFileName || !selfieFileName) {
+        const missing = [];
+        if (!frontIdFileName) missing.push("Front ID");
+        if (!backIdFileName) missing.push("Back ID");
+        if (!selfieFileName) missing.push("Selfie");
+
+        message.error(`Missing uploads: ${missing.join(", ")}`);
+        return false;
+      }
+
       const values = await form.validateFields();
       const payload: VerificationRequest = {
         accountObjectId: userInfo?.accountObjectId as string,
@@ -44,9 +59,9 @@ export const KycVerification: FC<KycVerificationProps> = ({
         natureOfWork: values.natureOfWork,
         sourceOfIncome: values.sourceOfIncome,
         salaryRange: values.salaryRange,
-        frontIdPath: "",
-        selfiePath: "",
-        backIdPath: ""
+        frontIdPath: frontIdFileName,
+        selfiePath: selfieFileName,
+        backIdPath: backIdFileName
       }
 
       setloadingCount(1);
@@ -73,7 +88,13 @@ export const KycVerification: FC<KycVerificationProps> = ({
       setloadingCount((prev) => Math.max(prev - 1, 0));
 
       if (data.status === 'done') {
-        console.log('Upload successful:', data.url);
+        if (data.label == "ID FRONT") {
+          setfrontIdFileName(data.data as string);
+        } else if (data.label == "ID BACK") {
+          setbackIdFileName(data.data as string);
+        } else {
+          setselfieFileName(data.data as string);
+        }
       } else {
         message.error('Upload failed.');
       }
