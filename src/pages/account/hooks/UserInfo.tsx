@@ -5,6 +5,7 @@ import { useState } from "react";
 // import axios from "axios";
 import { useUserInfoStore } from "./useUserInfoStore";
 import { getCurrentInfo } from "../../../services/accountService";
+import { message } from "antd";
 
 export const UserInfo=() => {
   const { userInfo, setUserInfo } = useUserInfoStore();
@@ -15,8 +16,12 @@ export const UserInfo=() => {
     setLoading(true);
     try {
       const response = await getCurrentInfo();
-      setUserInfo(response);
-      setError(null);
+      if ('errorMessage' in response && typeof response.errorMessage === 'string') {
+        message.error(response.errorMessage);
+      } else {
+        setUserInfo(response);
+        setError(null);
+      }
     } catch (err: any) {
       setError(err.message);
       throw err;
