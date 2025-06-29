@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from "react";
-import { Button, DatePicker, Form, Input } from "antd";
+import { Button, DatePicker, Form, Input, message } from "antd";
 import { KycVerification } from "./components/KycVerification";
 import { UserInfo } from "./hooks/UserInfo";
 import dayjs from "dayjs";
 import { formatDateTime, formatDateToYMD, validateAge } from "../../utils/commonHelpers";
+import { UserUpdateRequest } from "./models/UserUpdateRequest";
+import { basicUserUpdate } from "../../services/userService";
 
 // const { Text } = Typography;
 
@@ -19,8 +21,23 @@ export const MyProfile: FC = () => {
         getUserDetails();
     }
 
-    const handleSaveChanges = (values: any) => {
-        console.log("Form values to save:", values);
+    const handleSaveChanges = async () => {
+
+        const values = await form.validateFields();
+        const updateRequest: UserUpdateRequest = {
+            userId: userInfo?.accountInfo.userId,
+            birthDate: values.birthDate,
+            email: values.email,
+            mobileNumber: values.mobileNumber
+        };
+
+        try {
+            await basicUserUpdate(updateRequest);
+            message.success("Basic information updated successfully");
+            handleVerificationOkay();
+        } catch (err: any) {
+            message.error(err ?? "Unable to update user info!");
+        }
     };
 
     useEffect(() => {
@@ -93,7 +110,7 @@ export const MyProfile: FC = () => {
             <div>
                 <Form.Item
                 label="Date of Birth"
-                name="dateOfBirth"
+                name="birthDate"
                 rules={[
                     { required: true, message: "Please select your date of birth!" },
                     { validator: validateAge },

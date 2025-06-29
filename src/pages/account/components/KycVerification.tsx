@@ -67,11 +67,11 @@ export const KycVerification: FC<KycVerificationProps> = ({
       setloadingCount(1);
       try {
         await basicVerification(payload);
+        message.success("Request verification successfully");
         handleOk();
         handleCancel();
       } catch (err: any) {
         setloadingCount(0);
-        console.log(err);
       } finally {
         setloadingCount(0);
       }
