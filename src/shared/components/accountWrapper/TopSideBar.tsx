@@ -3,12 +3,12 @@ import { UserInfo } from "../../../pages/account/hooks/UserInfo";
 import { getImageString } from "../../../services/uploadService";
 
 export const TopSideBar: FC = () => {
-  const { userInfo } = UserInfo();
+  const { userInfo } = UserInfo(); // Assume this returns an object like { userInfo: {...} }
   const [propImg, setPropImg] = useState<string>("");
   const hasLoadedImage = useRef(false);
 
   useEffect(() => {
-    const selfiePath = userInfo?.selfiePath;
+    const selfiePath = userInfo?.accountInfo?.selfiePath;
 
     if (
       selfiePath &&
@@ -25,21 +25,25 @@ export const TopSideBar: FC = () => {
           hasLoadedImage.current = false;
         });
     }
-  }, [userInfo?.selfiePath]);
+  }, [userInfo?.accountInfo?.selfiePath]);
 
   return (
     <>
       <div className="profile-card">
         <div className="profile-card-flex">
           <div className="avatar">
-            {propImg && <img src={propImg} alt="prop" />}
+            {propImg && <img src={propImg} alt="Profile" />}
           </div>
           <div>
             <div style={{ marginBottom: "10px" }}>
-              {userInfo?.fullname || "..."}
+              {userInfo?.accountInfo?.fullName || "..."}
             </div>
-            <span className={`badge ${userInfo?.isVerified ? "success" : "pending"}`}>
-              {userInfo?.isVerified ? "Verified" : "Pending"}
+            <span
+              className={`badge ${
+                userInfo?.accountInfo?.isVerified ? "success" : "pending"
+              }`}
+            >
+              {userInfo?.accountInfo?.isVerified ? "Verified" : "Pending"}
             </span>
           </div>
         </div>
@@ -47,7 +51,11 @@ export const TopSideBar: FC = () => {
         <div className="profile-info">
           <div className="profile-card-flex">
             <span>ID:</span>
-            <span>{userInfo ? String(userInfo.accountInfoId).padStart(15, "0") : "..."}</span>
+            <span>
+              {userInfo?.accountInfo?.accountInfoId != null
+                ? String(userInfo.accountInfo.accountInfoId).padStart(15, "0")
+                : "..."}
+            </span>
           </div>
           <div className="profile-card-flex">
             <span>DEFAULT</span>
@@ -58,7 +66,12 @@ export const TopSideBar: FC = () => {
 
       <div className="credits-card">
         <span>Credits</span>
-        <strong>PHP 1250.43</strong>
+        <strong>
+          PHP{" "}
+          {userInfo?.totalCredits != null
+            ? userInfo.totalCredits.toFixed(2)
+            : "0.00"}
+        </strong>
       </div>
     </>
   );

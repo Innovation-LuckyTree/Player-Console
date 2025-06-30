@@ -4,7 +4,7 @@ export interface UserInfoResponse {
   accountObjectId: string;
   accountBonusId: string;
   userId: string;
-  fullname: string;
+  fullName: string;
   branchId: number;
   salaryRange: number;
   refferralKey: string;
@@ -24,8 +24,9 @@ export interface UserInfoResponse {
   signaturePath: string;
   profilePath: string;
   selfiePath: string;
-  createdOn: string;
+  dateCreated: string;
   isVerified: number;
   isActive: boolean;
   roleId: number;
+  lastPasswordChange: string;
 }

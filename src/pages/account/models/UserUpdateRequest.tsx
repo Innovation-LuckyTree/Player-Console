@@ -6,4 +6,5 @@ export interface UserUpdateRequest {
   martialStatus?: string | null;
   birthDate?: string | null;
   email?: string | null;
+  mobileNumber: string | null;
 }

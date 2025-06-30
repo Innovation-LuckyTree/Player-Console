@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { Button, Modal, Typography } from 'antd';
-import { CameraOutlined } from '@ant-design/icons';
+import { CameraOutlined, UploadOutlined } from '@ant-design/icons';
 const { Title } = Typography;
 
 interface SelfieProps {
@@ -24,9 +24,13 @@ const SelfieUpload: React.FC<SelfieProps> = ({ isModalOpen, handleCancel, imageC
     const pictureSrc = webcamRef.current?.getScreenshot();
     if (pictureSrc) {
       setPicture(pictureSrc);
-      imageCalback(pictureSrc);
     }
-  }, [imageCalback]);
+  }, []);
+
+  const uploadImage = () => {
+    imageCalback(picture);
+    handleCancel();
+  }
 
   return (
     <Modal
@@ -61,28 +65,42 @@ const SelfieUpload: React.FC<SelfieProps> = ({ isModalOpen, handleCancel, imageC
             }}
           >
             {picture !== null ? (
-              <Button
-                style={{ textTransform: 'capitalize' }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setPicture(null);
-                  imageCalback(null);
-                }}
-                color="primary"
-              >
-                Retake <CameraOutlined />
-              </Button>
+              <div style={{display:'flex',gap:'5px'}}>
+                <Button
+                  style={{ textTransform: 'capitalize' }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPicture(null);
+                    imageCalback(null);
+                  }}
+                  color="primary"
+                >
+                  Retake <CameraOutlined />
+                </Button>
+
+                <Button
+                  style={{ textTransform: 'capitalize', backgroundColor: '#52c41a', color: 'white', borderColor: '#52c41a' }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    uploadImage();
+                  }}
+                >
+                  Upload <UploadOutlined />
+                </Button>
+              </div>
             ) : (
-              <Button
-                style={{ textTransform: 'capitalize' }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  capture();
-                }}
-                color="primary"
-              >
-                Capture <CameraOutlined />
-              </Button>
+              <div>
+                <Button
+                  style={{ textTransform: 'capitalize' }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    capture();
+                  }}
+                  color="primary"
+                >
+                  Capture <CameraOutlined />
+                </Button>
+              </div>
             )}
           </div>
 

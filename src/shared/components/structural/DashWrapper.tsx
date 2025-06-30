@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useState } from "react"
-import { Button, Layout, message } from "antd"
+import { FC, useEffect, useRef, useState } from "react"
+import { Button, Layout, message, Spin } from "antd"
 import { MainMenu } from "./MainMenu"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { DollarOutlined, NotificationFilled, MoonFilled } from "@ant-design/icons"
@@ -13,11 +13,15 @@ import { LoginModal } from "../../../pages/login/LoginModal"
 import { RegistrationModal } from "../../../pages/login/RegistrationModal"
 import { ForgotPassword } from "../../../pages/login/ForgotPassword"
 import { LogoutModal } from "../../../pages/login/LogoutModal"
+import { UserInfo } from "../../../pages/account/hooks/UserInfo"
 
 // THis containains basic Layout for dashboard as well as AuthGuard for it.
 export const DashWrapper: FC = () => {
   const navigate = useNavigate();
+  const initialized = useRef(false)
+
   const { user, logout } = useAuth();
+  const { getUserDetails, userInfo, loading } = UserInfo();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [collapsed, _] = useState(false);
@@ -54,6 +58,22 @@ export const DashWrapper: FC = () => {
   // if (!isAuthenticated) {
   //   return <Navigate to="/login" replace />;
   // }
+
+  useEffect(() => {
+    if (!initialized.current && isAuthenticated) {
+        initialized.current = true;
+        getUserDetails();
+    }
+  }, [getUserDetails, isAuthenticated]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-black">
+        <Spin size="large" className="custom-spinner" />
+      </div>
+    )
+  }
+
   return (
     <>
       <Layout className="h-screen">
@@ -85,7 +105,7 @@ export const DashWrapper: FC = () => {
                   </Link>
                   <span>Credit:</span> 
                   <Link to="/account/wallet">
-                    <span className="credit">PHP 1250.43</span>
+                    <span className="credit">PHP {userInfo?.totalCredits != null ? userInfo.totalCredits.toFixed(2) : '0.00'}</span>
                   </Link>
                   <DollarOutlined />
                   <Button className="btn"><NotificationFilled /></Button>
